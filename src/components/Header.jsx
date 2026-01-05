@@ -18,7 +18,7 @@ export default function Header() {
     const navLinks = [
         { name: 'Inicio', href: '/' },
         { name: 'Catálogo', href: '/catalogo' },
-        { name: 'Cuidados', href: '/#cuidados' },
+        { name: 'Cuidados', href: '/cuidados' },
         { name: 'Feng Shui', href: '/#feng-shui' },
         { name: 'Nosotros', href: '/#nosotros' },
     ];
@@ -26,8 +26,8 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-white/90 backdrop-blur-lg shadow-md py-3'
-                    : 'bg-transparent py-4'
+                ? 'bg-white/90 backdrop-blur-lg shadow-md py-3'
+                : 'bg-transparent py-4'
                 }`}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
@@ -35,8 +35,8 @@ export default function Header() {
                 <Link href="/" className="flex items-center gap-2.5 group">
                     <div className="relative">
                         <div className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300 ${isScrolled
-                                ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
-                                : 'bg-white/20 backdrop-blur-sm'
+                            ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
+                            : 'bg-white/20 backdrop-blur-sm'
                             }`}>
                             <span className="text-xl">🌿</span>
                         </div>
@@ -56,8 +56,8 @@ export default function Header() {
                             key={link.name}
                             href={link.href}
                             className={`px-4 py-2 rounded-xl font-medium text-sm transition-all duration-200 ${isScrolled
-                                    ? 'text-neutral-600 hover:text-emerald-600 hover:bg-emerald-50'
-                                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                                ? 'text-neutral-600 hover:text-emerald-600 hover:bg-emerald-50'
+                                : 'text-white/90 hover:text-white hover:bg-white/10'
                                 }`}
                         >
                             {link.name}
@@ -83,8 +83,8 @@ export default function Header() {
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className={`md:hidden p-2 rounded-xl transition-colors ${isScrolled
-                            ? 'text-neutral-700 hover:bg-neutral-100'
-                            : 'text-white hover:bg-white/10'
+                        ? 'text-neutral-700 hover:bg-neutral-100'
+                        : 'text-white hover:bg-white/10'
                         }`}
                     aria-label="Toggle menu"
                 >

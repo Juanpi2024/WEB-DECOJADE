@@ -307,7 +307,7 @@ export default function Home() {
               >
                 <span className="text-3xl mb-3 block">{benefit.icon}</span>
                 <h3 className="font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-emerald-100 text-sm">{benefit.desc}</p>
+                <p className="text-white/80 text-sm">{benefit.desc}</p>
               </div>
             ))}
           </div>
