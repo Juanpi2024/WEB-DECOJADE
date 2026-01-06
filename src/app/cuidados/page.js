@@ -447,7 +447,7 @@ export default function CuidadosPage() {
                         problema o duda con tu planta de Jade.
                     </p>
                     <Link
-                        href="https://wa.me/56912345678?text=Hola! Necesito ayuda con el cuidado de mi planta de Jade"
+                        href="https://wa.me/56984668005?text=Hola! Necesito ayuda con el cuidado de mi planta de Jade"
                         target="_blank"
                         className="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-700 font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
                     >

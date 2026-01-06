@@ -112,7 +112,7 @@ export default function Home() {
                   </svg>
                 </Link>
                 <Link
-                  href="https://wa.me/56912345678?text=Hola! Me interesa una planta de Jade"
+                  href="https://wa.me/56984668005?text=Hola! Me interesa una planta de Jade"
                   target="_blank"
                   className="inline-flex items-center gap-2 bg-green-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-400 transition-all border border-white/20"
                 >
@@ -391,7 +391,7 @@ export default function Home() {
               Ver Catálogo
             </Link>
             <Link
-              href="https://wa.me/56912345678?text=Hola! Me interesa comprar una planta de Jade"
+              href="https://wa.me/56984668005?text=Hola! Me interesa comprar una planta de Jade"
               target="_blank"
               className="inline-flex items-center justify-center gap-2 bg-green-500 text-white font-semibold px-8 py-4 rounded-lg hover:bg-green-400 transition-all border border-white/30"
             >

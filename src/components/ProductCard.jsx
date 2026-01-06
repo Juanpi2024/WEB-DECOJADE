@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
 
     const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
     const whatsappMessage = `Hola! Me interesa: ${name} (${formatPrice(price)})`;
-    const whatsappLink = `https://wa.me/56912345678?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappLink = `https://wa.me/56984668005?text=${encodeURIComponent(whatsappMessage)}`;
 
     return (
         <article className="group bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-green-100 transition-all">
@@ -82,8 +82,8 @@ export default function ProductCard({ product }) {
                     href={inStock ? whatsappLink : '#'}
                     target={inStock ? '_blank' : undefined}
                     className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-medium text-sm transition-all ${inStock
-                            ? 'bg-green-600 hover:bg-green-700 text-white'
-                            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        ? 'bg-green-600 hover:bg-green-700 text-white'
+                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                         }`}
                 >
                     {inStock ? (

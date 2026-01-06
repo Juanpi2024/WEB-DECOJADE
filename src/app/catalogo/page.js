@@ -88,8 +88,8 @@ export default function CatalogoPage() {
                                     key={cat}
                                     onClick={() => setSelectedCategory(cat)}
                                     className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${selectedCategory === cat
-                                            ? 'bg-emerald-500 text-white shadow-md'
-                                            : 'bg-white text-neutral-600 hover:bg-emerald-50 border border-neutral-200'
+                                        ? 'bg-emerald-500 text-white shadow-md'
+                                        : 'bg-white text-neutral-600 hover:bg-emerald-50 border border-neutral-200'
                                         }`}
                                 >
                                     {cat}
@@ -167,7 +167,7 @@ export default function CatalogoPage() {
                     <h2 className="text-2xl font-bold text-neutral-900 mb-3">¿Necesitas asesoría?</h2>
                     <p className="text-neutral-500 mb-6">Te ayudamos a elegir el Jade ideal para ti</p>
                     <Link
-                        href="https://wa.me/56912345678?text=Necesito ayuda para elegir mi Jade"
+                        href="https://wa.me/56984668005?text=Necesito ayuda para elegir mi Jade"
                         target="_blank"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 text-white font-semibold rounded-xl hover:bg-emerald-600 transition-colors"
                     >

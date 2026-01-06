@@ -24,8 +24,8 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-white shadow-md py-3'
-                    : 'bg-transparent py-4'
+                ? 'bg-white shadow-md py-3'
+                : 'bg-transparent py-4'
                 }`}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
@@ -44,8 +44,8 @@ export default function Header() {
                             key={link.name}
                             href={link.href}
                             className={`font-medium transition-colors ${isScrolled
-                                    ? 'text-gray-700 hover:text-green-600'
-                                    : 'text-white/90 hover:text-white'
+                                ? 'text-gray-700 hover:text-green-600'
+                                : 'text-white/90 hover:text-white'
                                 }`}
                         >
                             {link.name}
@@ -55,11 +55,11 @@ export default function Header() {
 
                 {/* CTA Button */}
                 <Link
-                    href="https://wa.me/56912345678?text=Hola! Me interesa una planta de Jade"
+                    href="https://wa.me/56984668005?text=Hola! Me interesa una planta de Jade"
                     target="_blank"
                     className={`hidden md:inline-flex items-center gap-2 font-semibold px-5 py-2.5 rounded-lg transition-all ${isScrolled
-                            ? 'bg-green-600 text-white hover:bg-green-700'
-                            : 'bg-white text-green-700 hover:bg-gray-100'
+                        ? 'bg-green-600 text-white hover:bg-green-700'
+                        : 'bg-white text-green-700 hover:bg-gray-100'
                         }`}
                 >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -99,7 +99,7 @@ export default function Header() {
                             </Link>
                         ))}
                         <Link
-                            href="https://wa.me/56912345678"
+                            href="https://wa.me/56984668005"
                             target="_blank"
                             className="flex items-center justify-center gap-2 bg-green-600 text-white font-semibold py-3 rounded-lg mt-4"
                         >
