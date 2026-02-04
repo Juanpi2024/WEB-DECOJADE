@@ -17,7 +17,7 @@ const products = [
     name: 'Jade Crecimiento (2 Años)',
     description: 'Planta de jade en cremecento, 2 años de cultivo. Un detalle lleno de vida.',
     price: 3000,
-    image: '/jade_cremecento.png',
+    image: '/jade_3000_real.jpg',
     badge: 'Oferta Especial',
     benefits: ['Maceta Cremecento', '2 Años de Edad', 'Ideal Regalo']
   },
