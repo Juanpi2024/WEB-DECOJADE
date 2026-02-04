@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Phone } from 'lucide-react';
@@ -69,12 +70,34 @@ export default function Chatbot() {
         <>
             {/* Floating Button */}
             <motion.button
-                className="fixed bottom-6 right-6 z-50 bg-[#2d5a3c] text-white p-5 rounded-full shadow-lg hover:bg-[#234730] transition-colors"
+                className="fixed bottom-6 right-6 z-50 group"
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
             >
-                {isOpen ? <X size={40} /> : <MessageCircle size={40} />}
+                <div className="relative w-24 h-24 md:w-28 md:h-28 drop-shadow-2xl filter hover:brightness-110 transition-all">
+                    {/* Glowing effect behind */}
+                    <div className="absolute inset-0 bg-green-500 rounded-full blur-xl opacity-20 group-hover:opacity-40 animate-pulse"></div>
+
+                    {isOpen ? (
+                        <div className="w-full h-full bg-[#2d5a3c] rounded-full flex items-center justify-center border-4 border-white shadow-xl">
+                            <X size={40} className="text-white" />
+                        </div>
+                    ) : (
+                        <div className="relative w-full h-full">
+                            <Image
+                                src="/jade_plant_bonsai_1765587408143.png"
+                                alt="Chat con Experto"
+                                fill
+                                className="object-contain drop-shadow-xl"
+                            />
+                            {/* Speech bubble hint */}
+                            <div className="absolute -top-2 -left-2 bg-white text-[#2d5a3c] text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-green-100 animate-bounce">
+                                ¡Pregúntame!
+                            </div>
+                        </div>
+                    )}
+                </div>
             </motion.button>
 
             {/* Chat Window */}
