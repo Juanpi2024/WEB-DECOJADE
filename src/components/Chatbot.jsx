@@ -62,19 +62,19 @@ export default function Chatbot() {
     };
 
     const openWhatsApp = () => {
-        window.open('https://wa.me/56912345678?text=Hola,%20quisiera%20asesoría%20sobre%20mis%20jades', '_blank');
+        window.open('https://wa.me/56984668005?text=Hola,%20quisiera%20asesoría%20sobre%20mis%20jades', '_blank');
     };
 
     return (
         <>
             {/* Floating Button */}
             <motion.button
-                className="fixed bottom-6 right-6 z-50 bg-[#2d5a3c] text-white p-4 rounded-full shadow-lg hover:bg-[#234730] transition-colors"
+                className="fixed bottom-6 right-6 z-50 bg-[#2d5a3c] text-white p-5 rounded-full shadow-lg hover:bg-[#234730] transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
             >
-                {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
+                {isOpen ? <X size={40} /> : <MessageCircle size={40} />}
             </motion.button>
 
             {/* Chat Window */}
@@ -107,8 +107,8 @@ export default function Chatbot() {
                                 >
                                     <div
                                         className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.role === 'user'
-                                                ? 'bg-[#2d5a3c] text-white rounded-br-none'
-                                                : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
+                                            ? 'bg-[#2d5a3c] text-white rounded-br-none'
+                                            : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
                                             }`}
                                     >
                                         {msg.content}
