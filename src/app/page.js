@@ -44,9 +44,9 @@ const products = [
     name: 'Jade Gigante',
     description: 'La máxima expresión de prosperidad. Un ejemplar maduro e impactante.',
     price: 15000,
-    image: '/jade_plant_large.png',
+    image: '/jade_gigante_real.png',
     badge: 'Exclusivo',
-    benefits: ['40+ cm altura', 'Tronco leñoso', 'Impacto visual total']
+    benefits: ['80+ cm altura', 'Tronco leñoso', 'Impacto visual total']
   }
 ];
 
