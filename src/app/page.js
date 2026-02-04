@@ -4,6 +4,15 @@ import ProductCard from '@/components/ProductCard';
 
 const products = [
   {
+    id: 'jade-2-anos',
+    name: 'Jade 2 Años',
+    description: 'Planta de jade en cremecento, 2 años de cultivo. Un detalle lleno de vida.',
+    price: 2000,
+    image: '/jade_cremecento.png',
+    badge: 'Oferta Especial',
+    benefits: ['Maceta Cremecento', '2 Años de Edad', 'Ideal Regalo']
+  },
+  {
     id: 'pequeno',
     name: 'Jade Pequeño',
     description: 'El inicio perfecto para tu colección. Ideal para escritorios y espacios íntimos.',
