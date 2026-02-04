@@ -1,7 +1,9 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import Chatbot from "@/components/Chatbot";
+
+
 
 export const metadata = {
   title: "DecoJade | Plantas de Jade - Árbol del Dinero y Prosperidad",
@@ -26,7 +28,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <WhatsAppButton />
+        <Chatbot />
       </body>
     </html>
   );
