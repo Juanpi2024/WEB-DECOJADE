@@ -4,22 +4,22 @@ import ProductCard from '@/components/ProductCard';
 
 const products = [
   {
+    id: 'jade-1-ano',
+    name: 'Jade Nueva (1 Año)',
+    description: 'Planta joven con gran potencial. Perfecta para comenzar a cuidar.',
+    price: 1000,
+    image: '/jade_plant_small.png',
+    badge: 'Económica',
+    benefits: ['1 Año de Edad', 'Raíz establecida', 'Ideal Souvenir']
+  },
+  {
     id: 'jade-2-anos',
-    name: 'Jade 2 Años',
+    name: 'Jade Crecimiento (2 Años)',
     description: 'Planta de jade en cremecento, 2 años de cultivo. Un detalle lleno de vida.',
-    price: 2000,
+    price: 3000,
     image: '/jade_cremecento.png',
     badge: 'Oferta Especial',
     benefits: ['Maceta Cremecento', '2 Años de Edad', 'Ideal Regalo']
-  },
-  {
-    id: 'pequeno',
-    name: 'Jade Pequeño',
-    description: 'El inicio perfecto para tu colección. Ideal para escritorios y espacios íntimos.',
-    price: 3000,
-    image: '/jade_real_collage.jpg',
-    badge: 'Ideal Principiantes',
-    benefits: ['5-10 cm aprox', 'Maceta básica incluida', 'Guía de cuidados digital']
   },
   {
     id: 'mediano',
@@ -38,6 +38,15 @@ const products = [
     image: '/jade_real_large.jpg',
     badge: 'Colección',
     benefits: ['30+ cm altura', 'Formación tipo bonsái', 'Maceta de cerámica']
+  },
+  {
+    id: 'gigante',
+    name: 'Jade Gigante',
+    description: 'La máxima expresión de prosperidad. Un ejemplar maduro e impactante.',
+    price: 15000,
+    image: '/jade_plant_large.png',
+    badge: 'Exclusivo',
+    benefits: ['40+ cm altura', 'Tronco leñoso', 'Impacto visual total']
   }
 ];
 
