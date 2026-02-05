@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -30,11 +31,15 @@ export default function Header() {
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2">
-                    <span className="text-2xl">🌿</span>
-                    <span className={`text-xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
-                        Deco<span className="text-green-500">Jade</span>
-                    </span>
+                <Link href="/" className="flex items-center gap-3">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-green-500 shadow-md">
+                        <Image
+                            src="/logo_decojade.jpg"
+                            alt="DecoJade Logo"
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
                 </Link>
 
                 {/* Desktop Navigation */}
