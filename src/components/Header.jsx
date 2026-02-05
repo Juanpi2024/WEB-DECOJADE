@@ -32,7 +32,7 @@ export default function Header() {
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-green-500 shadow-md">
+                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-green-500 shadow-lg transition-transform hover:scale-105 duration-300">
                         <Image
                             src="/logo_decojade.jpg"
                             alt="DecoJade Logo"

@@ -240,25 +240,42 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-[#1C4532] mb-4">Visita Nuestro Vivero</h2>
             <p className="text-gray-600">Ven a elegir tu Jade personalmente. Te esperamos en Parral.</p>
           </div>
-          <div className="bg-white p-4 rounded-3xl shadow-lg max-w-4xl mx-auto">
-            <div className="aspect-video w-full rounded-2xl overflow-hidden relative">
-              <iframe
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                src="https://maps.google.com/maps?q=Tarapacá+17,+Parral,+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                className="absolute inset-0"
-              ></iframe>
-            </div>
-            <div className="mt-6 text-center">
-              <p className="font-bold text-[#1C4532] text-xl">Calle Tarapacá #17</p>
-              <p className="text-gray-600">Parral, Región del Maule</p>
-              <p className="text-sm text-green-600 font-semibold mt-2 animate-pulse">
-                ⚠️ Importante: Agenda tu visita por WhatsApp antes de venir
-              </p>
+          <div className="bg-white p-6 rounded-3xl shadow-lg max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Map Side */}
+              <div className="w-full h-full flex flex-col">
+                <div className="aspect-video w-full rounded-2xl overflow-hidden relative shadow-md flex-grow">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src="https://maps.google.com/maps?q=Tarapacá+17,+Parral,+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    className="absolute inset-0"
+                  ></iframe>
+                </div>
+                <div className="mt-6 text-center">
+                  <p className="font-bold text-[#1C4532] text-xl">Calle Tarapacá #17</p>
+                  <p className="text-gray-600">Parral, Región del Maule</p>
+                  <p className="text-sm text-green-600 font-semibold mt-2 animate-pulse">
+                    ⚠️ Importante: Agenda tu visita por WhatsApp antes de venir
+                  </p>
+                </div>
+              </div>
+
+              {/* Poster Side */}
+              <div className="w-full flex justify-center">
+                <div className="relative aspect-[3/4] w-full max-w-sm rounded-2xl overflow-hidden shadow-xl border-4 border-[#F5F1E8]">
+                  <Image
+                    src="/afiche_oficial.png"
+                    alt="Afiche DecoJade"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
