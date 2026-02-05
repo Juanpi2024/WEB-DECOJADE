@@ -20,6 +20,7 @@ export default function Header() {
         { name: 'Inicio', href: '/' },
         { name: 'Catálogo', href: '/catalogo' },
         { name: 'Cuidados', href: '/cuidados' },
+        { name: 'Feng Shui', href: '/#feng-shui' },
     ];
 
     return (
