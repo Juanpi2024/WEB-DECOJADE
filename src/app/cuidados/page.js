@@ -13,6 +13,12 @@ const icons = {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
     ),
+    sunCloud: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h10a4 4 0 004-4" />
+        </svg>
+    ),
     water: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3c-4.97 5.667-7 9.333-7 12a7 7 0 1014 0c0-2.667-2.03-6.333-7-12z" />
@@ -50,8 +56,18 @@ const icons = {
         </svg>
     ),
     check: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+        </svg>
+    ),
+    warning: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+    ),
+    stop: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
     ),
     leaf: (
@@ -69,171 +85,158 @@ const careGuides = [
         shortDesc: '4-6 horas de luz indirecta brillante',
         color: 'amber',
         keyPoints: [
-            { label: 'Ideal', value: '4-6 horas luz indirecta' },
-            { label: 'Ubicación', value: 'Ventana este u oeste' },
-            { label: 'Evitar', value: 'Sol directo mediodía' },
+            { label: 'Ideal', value: '4-6h Sol' },
+            { label: 'Ubicación', value: 'Ventana Este' },
+            { label: 'Cuidado', value: 'Evitar Tarde' },
         ],
         content: [
             {
                 title: 'Condiciones ideales',
-                items: ['4-6 horas de luz brillante indirecta al día', 'Puede tolerar sol directo suave por la mañana', 'Evitar sol intenso del mediodía en verano']
+                type: 'ideal',
+                items: ['Luz brillante indirecta', 'Sol suave mañanero', 'Protección mediodía']
             },
             {
                 title: 'Señales de poca luz',
-                items: ['Tallos alargados y débiles', 'Hojas más separadas de lo normal', 'Crecimiento lento']
+                type: 'warning',
+                items: ['Tallos débiles', 'Hojas separadas', 'Sin crecimiento']
             },
             {
                 title: 'Señales de exceso',
-                items: ['Hojas amarillentas o marrones', 'Quemaduras en bordes', 'Textura arrugada']
+                type: 'danger',
+                items: ['Hojas amarillas', 'Quemaduras', 'Arrugas']
             }
         ],
-        tips: ['Rota la maceta cada 2 semanas', 'Ventana al este es ideal', 'Usa cortina si el sol es muy intenso'],
+        tips: ['Rota cada 2 semanas', 'Filtra el sol intenso', 'Limpia el polvo'],
     },
     {
         id: 'riego',
         icon: icons.water,
         title: 'Riego',
-        shortDesc: 'Solo cuando la tierra esté completamente seca',
+        shortDesc: 'Solo cuando la tierra esté seca',
         color: 'blue',
         keyPoints: [
-            { label: 'Frecuencia', value: 'Cada 2-3 semanas' },
-            { label: 'Regla', value: 'Menos es más' },
-            { label: 'Invierno', value: 'Reducir a 4-6 semanas' },
+            { label: 'Verano', value: '2-3 Semanas' },
+            { label: 'Invierno', value: '4-6 Semanas' },
+            { label: 'Regla', value: 'Sustrato Seco' },
         ],
         content: [
             {
-                title: 'Cuándo regar',
-                items: ['Cuando la tierra esté completamente seca', 'Cada 2-3 semanas en primavera/verano', 'Cada 4-6 semanas en otoño/invierno']
+                title: 'Protocolo de Riego',
+                type: 'ideal',
+                items: ['Tierra seca al 100%', 'Agua temp. ambiente', 'Drenar exceso siempre']
             },
             {
-                title: 'Cómo regar',
-                items: ['Usa agua a temperatura ambiente', 'Riega hasta que salga por los agujeros', 'Vacía el plato después de 30 minutos']
+                title: 'Errores fatales',
+                type: 'danger',
+                items: ['Regar por rutina', 'Agua estancada', 'Riego diario']
             },
             {
-                title: 'Señales de exceso (error común)',
-                items: ['Hojas amarillentas y blandas', 'Tallo negro en la base', 'Olor a podrido']
+                title: 'Síntomas de agua',
+                type: 'warning',
+                items: ['Hojas blandas (Exceso)', 'Hojas arrugadas (Falta)', 'Caída de hojas']
             }
         ],
-        tips: ['Siempre deja secar entre riegos', 'Menos agua en invierno', 'Nunca dejes agua en el plato'],
+        tips: ['Usa palito para medir', 'Menos es más', 'Nunca encharcar'],
     },
     {
         id: 'temperatura',
         icon: icons.thermometer,
         title: 'Temperatura',
-        shortDesc: 'Entre 15°C y 24°C, proteger del frío extremo',
+        shortDesc: 'Clima templado, proteger del frío',
         color: 'rose',
         keyPoints: [
             { label: 'Día', value: '18°C - 24°C' },
-            { label: 'Noche', value: '12°C - 18°C' },
-            { label: 'Mínimo', value: 'No bajo 7°C' },
+            { label: 'Noche', value: '10°C - 15°C' },
+            { label: 'Límite', value: 'Min 7°C' },
         ],
         content: [
             {
-                title: 'Lo que debes evitar',
-                items: ['Temperaturas bajo 7°C', 'Heladas (son letales)', 'Corrientes de aire frío', 'Calefacción directa']
+                title: 'Ambiente Ideal',
+                type: 'ideal',
+                items: ['Ventilación suave', 'Diferencia día/noche', 'Ambiente seco']
             },
             {
-                title: 'Consejos para invierno',
-                items: ['Aleja de ventanas frías por la noche', 'No dejes en terrazas si hay riesgo de heladas', 'Reduce el riego drásticamente']
+                title: 'Peligros',
+                type: 'danger',
+                items: ['Heladas (<0°C)', 'Calefacción directa', 'Corrientes frías']
             }
         ],
-        tips: ['Proteger de heladas', 'Alejar de corrientes frías', 'Diferencia día/noche es beneficiosa'],
+        tips: ['Entrar en invierno', 'Alejar de radiadores', 'Proteger en terrazas'],
     },
     {
         id: 'sustrato',
         icon: icons.pot,
         title: 'Sustrato y Maceta',
-        shortDesc: 'Mezcla para suculentas con excelente drenaje',
+        shortDesc: 'Drenaje perfecto es la clave',
         color: 'orange',
         keyPoints: [
-            { label: 'Sustrato', value: 'Mezcla para cactus' },
-            { label: 'Maceta', value: 'Con agujeros obligatorio' },
-            { label: 'Trasplante', value: 'Cada 2-3 años' },
+            { label: 'Sustrato', value: 'Tipo Cactus' },
+            { label: 'Maceta', value: 'Con Agujeros' },
+            { label: 'Material', value: 'Terracota' },
         ],
         content: [
             {
-                title: 'Sustrato ideal',
-                items: ['Mezcla comercial para cactus/suculentas', 'O: 50% tierra + 25% arena + 25% perlita', 'pH ligeramente ácido (6.0-6.5)']
+                title: 'Mezcla recomendada',
+                type: 'ideal',
+                items: ['50% Tierra negra', '25% Perlita/Pómice', '25% Arena gruesa']
             },
             {
-                title: 'La maceta perfecta',
-                items: ['OBLIGATORIO: agujeros de drenaje', 'Terracota es ideal (permite respirar)', 'Tamaño apropiado, no muy grande']
+                title: 'La maceta',
+                type: 'warning',
+                items: ['Si no drena, mata', 'Terracota respira mejor', 'Tamaño justo al sistema']
             }
         ],
-        tips: ['Maceta con agujeros es obligatorio', 'Terracota es el mejor material', 'Trasplantar cada 2-3 años'],
+        tips: ['Comprueba drenaje', 'Cambio cada 2 años', 'No usar macetas gigantes'],
     },
     {
         id: 'poda',
         icon: icons.scissors,
-        title: 'Poda y Propagación',
-        shortDesc: 'Podar para dar forma y propagar fácilmente',
+        title: 'Poda y Estilo',
+        shortDesc: 'Dar forma y fortalecer',
         color: 'green',
         keyPoints: [
-            { label: 'Época', value: 'Primavera/verano' },
-            { label: 'Método', value: 'Esquejes o hojas' },
-            { label: 'Secado', value: '3-5 días antes de plantar' },
+            { label: 'Cuándo', value: 'Primavera' },
+            { label: 'Herramienta', value: 'Tijera Limpia' },
+            { label: 'Uso', value: 'Esquejes' },
         ],
         content: [
             {
-                title: 'Cuándo podar',
-                items: ['Primavera o inicio de verano', 'Cuando esté desproporcionada', 'Para dar forma de bonsái']
+                title: 'Beneficios',
+                type: 'ideal',
+                items: ['Tronco más grueso', 'Copa más densa', 'Nuevas plantas gratis']
             },
             {
-                title: 'Propagación por esquejes',
-                items: ['Corta un tallo de 5-10 cm', 'Deja secar 3-5 días', 'Planta en sustrato seco', 'Espera 2 semanas antes de regar']
+                title: 'Técnica',
+                type: 'warning',
+                items: ['Corta sobre el nudo', 'Deja secar la herida', 'No podar en invierno']
             }
         ],
-        tips: ['Podar en primavera o verano', 'Los esquejes enraízan muy fácil', 'Dejar secar antes de plantar'],
+        tips: ['Limpia con alcohol', 'Canela para cicatrizar', 'Planta lo que cortes'],
     },
     {
         id: 'fertilizacion',
         icon: icons.beaker,
-        title: 'Fertilización',
-        shortDesc: 'Fertilizar cada 2-3 meses solo en temporada de crecimiento',
+        title: 'Nutrientes',
+        shortDesc: 'Poco alimento, solo en crecimiento',
         color: 'purple',
         keyPoints: [
-            { label: 'Época', value: 'Solo primavera/verano' },
-            { label: 'Frecuencia', value: 'Cada 2-3 meses' },
-            { label: 'Dilución', value: '50% de lo recomendado' },
+            { label: 'Cuándo', value: 'Prim/Verano' },
+            { label: 'Dosis', value: '50% Normal' },
+            { label: 'Freq', value: '8-10 semanas' },
         ],
         content: [
-            {
-                title: 'Cuándo fertilizar',
-                items: ['Solo en primavera y verano', 'Cada 2-3 meses es suficiente', 'NUNCA en otoño ni invierno']
-            },
             {
                 title: 'Cómo aplicar',
-                items: ['Diluye al 50%', 'Aplica sobre sustrato húmedo', 'Evita que toque las hojas']
-            }
-        ],
-        tips: ['Fertilizar solo en primavera y verano', 'Diluir al 50%', 'Aplicar sobre sustrato húmedo'],
-    },
-    {
-        id: 'problemas',
-        icon: icons.medical,
-        title: 'Problemas Comunes',
-        shortDesc: 'Identificar y solucionar problemas frecuentes',
-        color: 'red',
-        keyPoints: [
-            { label: 'Problema #1', value: 'Exceso de riego' },
-            { label: 'Plaga común', value: 'Cochinilla' },
-            { label: 'Prevención', value: 'Revisar regularmente' },
-        ],
-        content: [
-            {
-                title: 'Hojas amarillas y blandas',
-                items: ['Causa: Exceso de riego (90%)', 'Solución: Dejar de regar, revisar raíces']
+                type: 'ideal',
+                items: ['Fertilizante líquido', 'Diluir a la mitad', 'Sustrato mojado previo']
             },
             {
-                title: 'Manchas blancas algodonosas',
-                items: ['Causa: Cochinilla (plaga)', 'Solución: Alcohol con algodón']
-            },
-            {
-                title: 'Tallo negro en la base',
-                items: ['Causa: Pudrición por exceso de agua', 'Solución: Cortar sano y propagar']
+                title: 'Nunca hacer',
+                type: 'danger',
+                items: ['Fertilizar en invierno', 'Dosis completa', 'Planta enferma/seca']
             }
         ],
-        tips: ['El exceso de agua es el problema #1', 'Actuar rápido ante pudrición', 'Revisar plagas regularmente'],
+        tips: ['Orgánico es mejor', 'Humus de lombriz', 'Descanso invernal'],
     },
 ];
 
@@ -302,7 +305,7 @@ export default function CuidadosPage() {
                 <div className="container mx-auto px-6">
                     <div className="max-w-5xl mx-auto">
                         <h2 className="text-2xl font-bold text-[#1C4532] mb-6 text-center">Índice de Contenidos</h2>
-                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                             {careGuides.map((guide) => (
                                 <a
                                     key={guide.id}
@@ -321,19 +324,19 @@ export default function CuidadosPage() {
             </section>
 
             {/* Care Guides - Professional Card Layout */}
-            <section className="py-16 bg-white">
+            <section className="py-16 bg-white space-y-24">
                 <div className="container mx-auto px-6">
-                    <div className="max-w-5xl mx-auto space-y-8">
+                    <div className="max-w-5xl mx-auto space-y-16">
                         {careGuides.map((guide) => (
                             <article
                                 key={guide.id}
                                 id={guide.id}
-                                className={`rounded-3xl overflow-hidden border-2 ${colorClasses[guide.color].border} scroll-mt-24 shadow-sm hover:shadow-lg transition-shadow`}
+                                className={`rounded-3xl overflow-hidden border-2 ${colorClasses[guide.color].border} scroll-mt-24 shadow-sm hover:shadow-lg transition-shadow bg-white`}
                             >
                                 {/* Header */}
                                 <div className={`p-6 ${colorClasses[guide.color].bg} border-b ${colorClasses[guide.color].border}`}>
                                     <div className="flex items-center gap-4">
-                                        <div className={`w-16 h-16 rounded-2xl ${colorClasses[guide.color].iconBg} ${colorClasses[guide.color].text} flex items-center justify-center`}>
+                                        <div className={`w-16 h-16 rounded-2xl ${colorClasses[guide.color].iconBg} ${colorClasses[guide.color].text} flex items-center justify-center shadow-sm`}>
                                             {guide.icon}
                                         </div>
                                         <div className="flex-1">
@@ -343,43 +346,77 @@ export default function CuidadosPage() {
                                     </div>
                                 </div>
 
-                                {/* Key Points Bar */}
-                                <div className="grid grid-cols-3 divide-x divide-gray-100 bg-gray-50 border-b border-gray-100">
+                                {/* Key Points Bar - More spaced out */}
+                                <div className="grid grid-cols-3 divide-x divide-gray-100 bg-gray-50/50 border-b border-gray-100">
                                     {guide.keyPoints.map((point) => (
-                                        <div key={point.label} className="p-4 text-center">
+                                        <div key={point.label} className="p-4 text-center hover:bg-white transition-colors">
                                             <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{point.label}</p>
                                             <p className="font-bold text-gray-800 text-sm">{point.value}</p>
                                         </div>
                                     ))}
                                 </div>
 
-                                {/* Content */}
-                                <div className="p-6 md:p-8">
+                                {/* Content Grid - Card Style */}
+                                <div className="p-6 md:p-8 bg-white">
                                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                        {guide.content.map((section, i) => (
-                                            <div key={i} className="bg-gray-50 rounded-2xl p-5">
-                                                <h3 className="font-bold text-gray-800 mb-3">{section.title}</h3>
-                                                <ul className="space-y-2">
-                                                    {section.items.map((item, j) => (
-                                                        <li key={j} className="flex items-start gap-2 text-sm text-gray-600">
-                                                            <span className={`mt-1 ${colorClasses[guide.color].text}`}>{icons.check}</span>
-                                                            {item}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        ))}
+                                        {guide.content.map((section, i) => {
+                                            // Determine styles based on section type
+                                            let cardBg = 'bg-gray-50';
+                                            let titleColor = 'text-gray-800';
+                                            let icon = icons.check;
+                                            let iconColor = colorClasses[guide.color].text;
+
+                                            if (section.type === 'ideal') {
+                                                cardBg = 'bg-green-50/50 border border-green-100';
+                                                titleColor = 'text-green-800';
+                                                icon = icons.check;
+                                                iconColor = 'text-green-600';
+                                            } else if (section.type === 'warning') {
+                                                cardBg = 'bg-amber-50/50 border border-amber-100';
+                                                titleColor = 'text-amber-800';
+                                                icon = icons.warning;
+                                                iconColor = 'text-amber-600';
+                                            } else if (section.type === 'danger') {
+                                                cardBg = 'bg-red-50/50 border border-red-100';
+                                                titleColor = 'text-red-800';
+                                                icon = icons.stop;
+                                                iconColor = 'text-red-600';
+                                            }
+
+                                            return (
+                                                <div key={i} className={`${cardBg} rounded-2xl p-5 hover:scale-[1.02] transition-transform duration-300`}>
+                                                    <h3 className={`font-bold ${titleColor} mb-4 flex items-center gap-2`}>
+                                                        {icon}
+                                                        {section.title}
+                                                    </h3>
+                                                    <ul className="space-y-3">
+                                                        {section.items.map((item, j) => (
+                                                            <li key={j} className="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                                                                <span className={`mt-0.5 shrink-0 ${iconColor} opacity-70`}>•</span>
+                                                                {item}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
 
-                                    {/* Tips */}
-                                    <div className={`mt-6 p-5 ${colorClasses[guide.color].bg} rounded-2xl border ${colorClasses[guide.color].border}`}>
-                                        <h4 className={`font-bold ${colorClasses[guide.color].text} mb-3 flex items-center gap-2`}>
+                                    {/* Tips Section */}
+                                    <div className={`mt-8 p-6 ${colorClasses[guide.color].bg} rounded-2xl border ${colorClasses[guide.color].border} relative overflow-hidden`}>
+                                        <div className="absolute right-0 top-0 opacity-10 -mr-4 -mt-4 transform rotate-12">
+                                            <div className={`w-32 h-32 ${colorClasses[guide.color].text}`}>
+                                                {guide.icon}
+                                            </div>
+                                        </div>
+
+                                        <h4 className={`font-bold ${colorClasses[guide.color].text} mb-4 flex items-center gap-2 relative z-10`}>
                                             {icons.lightbulb}
-                                            Consejos rápidos
+                                            Consejos de experto
                                         </h4>
-                                        <div className="flex flex-wrap gap-3">
+                                        <div className="flex flex-wrap gap-3 relative z-10">
                                             {guide.tips.map((tip, i) => (
-                                                <span key={i} className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm text-gray-700 shadow-sm">
+                                                <span key={i} className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm text-gray-700 shadow-sm border border-gray-100">
                                                     <span className={`${colorClasses[guide.color].text}`}>{icons.check}</span>
                                                     {tip}
                                                 </span>
