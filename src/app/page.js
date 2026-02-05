@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#F5F1E8]">
       {/* Organic Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1C4532] to-[#2F855A] pt-32 pb-20 lg:pt-40 lg:pb-32 rounded-b-[3rem] lg:rounded-b-[5rem] shadow-xl">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1C4532] to-[#2F855A] pt-40 pb-20 lg:pt-56 lg:pb-32 rounded-b-[3rem] lg:rounded-b-[5rem] shadow-xl">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
           <svg className="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
