@@ -43,7 +43,7 @@ const products = [
     id: 'gigante',
     name: 'Jade Gigante',
     description: 'La máxima expresión de prosperidad. Un ejemplar maduro e impactante.',
-    price: 15000,
+    price: 25000,
     image: '/jade_gigante_real.png',
     badge: 'Exclusivo',
     benefits: ['80+ cm altura', 'Tronco leñoso', 'Impacto visual total']
