@@ -256,6 +256,9 @@ export default function Home() {
             <div className="mt-6 text-center">
               <p className="font-bold text-[#1C4532] text-xl">Calle Tarapacá #17</p>
               <p className="text-gray-600">Parral, Región del Maule</p>
+              <p className="text-sm text-green-600 font-semibold mt-2 animate-pulse">
+                ⚠️ Importante: Agenda tu visita por WhatsApp antes de venir
+              </p>
             </div>
           </div>
         </div>
