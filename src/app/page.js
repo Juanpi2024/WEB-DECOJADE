@@ -8,7 +8,7 @@ const products = [
     name: 'Jade Nueva (1 Año)',
     description: 'Planta joven con gran potencial. Perfecta para comenzar a cuidar.',
     price: 1000,
-    image: '/jade_plant_small.png',
+    image: '/jade_1000_real.png',
     badge: 'Económica',
     benefits: ['1 Año de Edad', 'Raíz establecida', 'Ideal Souvenir']
   },
@@ -117,8 +117,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
               ),
-              title: 'Envío Seguro',
-              desc: 'Empaque protector'
+              title: 'Retiro en Vivero',
+              desc: 'Tarapacá #17, Parral'
             },
             {
               icon: (
@@ -229,6 +229,34 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Location Section */}
+      <section className="py-20 bg-[#F5F1E8]">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-[#1C4532] mb-4">Visita Nuestro Vivero</h2>
+            <p className="text-gray-600">Ven a elegir tu Jade personalmente. Te esperamos en Parral.</p>
+          </div>
+          <div className="bg-white p-4 rounded-3xl shadow-lg max-w-4xl mx-auto">
+            <div className="aspect-video w-full rounded-2xl overflow-hidden relative">
+              <iframe
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src="https://maps.google.com/maps?q=Tarapacá+17,+Parral,+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="absolute inset-0"
+              ></iframe>
+            </div>
+            <div className="mt-6 text-center">
+              <p className="font-bold text-[#1C4532] text-xl">Calle Tarapacá #17</p>
+              <p className="text-gray-600">Parral, Región del Maule</p>
+            </div>
           </div>
         </div>
       </section>
