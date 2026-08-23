@@ -35,7 +35,7 @@ export default function Home() {
             </span>
 
             <h1 className="t-hero text-bone-100 mb-7">
-              Regala un árbol
+              Regala un árbol de jade
               <br />
               <span className="text-olive-400 italic">que se hereda.</span>
             </h1>
