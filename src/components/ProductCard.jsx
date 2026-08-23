@@ -1,74 +1,98 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Check, ArrowUpRight } from 'lucide-react';
+import { formatCLP, waLink } from '@/lib/products';
 
-export default function ProductCard({ product }) {
-    const { name, price, image, badge, benefits, description } = product;
+export default function ProductCard({ product, priority = false }) {
+    const {
+        name, subtitle, price, priceLabel, priceNote,
+        image, badge, benefits, description, featured, variablePrice,
+    } = product;
 
-    const formatPrice = (value) => {
-        return new Intl.NumberFormat('es-CL', {
-            style: 'currency',
-            currency: 'CLP',
-            minimumFractionDigits: 0,
-        }).format(value);
-    };
+    const displayPrice = priceLabel || formatCLP(price);
 
-    const whatsappMessage = `Hola! Me interesa: ${name} (${formatPrice(price)})`;
-    const whatsappLink = `https://wa.me/56984668005?text=${encodeURIComponent(whatsappMessage)}`;
+    // Sólo los formatos sin precio cerrado invitan a "Consultar".
+    // El resto lleva un CTA de compra, que convierte mejor.
+    const cta = variablePrice ? 'Consultar' : 'Lo quiero';
+    const message = variablePrice
+        ? `Hola! Me interesa el ${name} (${displayPrice}). ¿Qué ejemplares tienen disponibles?`
+        : `Hola! Me interesa el ${name} (${displayPrice}). ¿Tienen stock?`;
 
     return (
-        <article className="group bg-white rounded-[2rem] border border-gray-100 overflow-hidden hover:shadow-xl hover:shadow-green-50/50 transition-all duration-500 hover:-translate-y-1">
-            {/* Image */}
-            <div className="relative aspect-square overflow-hidden bg-[#F0FDF4]">
+        <article
+            className={`group relative flex h-full flex-col overflow-hidden rounded-card bg-bone-50 transition-all duration-500 hover:-translate-y-1.5 ${
+                featured
+                    ? 'ring-2 ring-clay-500 shadow-[0_18px_50px_-24px_rgba(174,123,80,0.55)]'
+                    : 'ring-1 ring-forest-900/8 hover:ring-forest-900/16 hover:shadow-[0_18px_50px_-28px_rgba(31,51,36,0.5)]'
+            }`}
+        >
+            <div className="relative aspect-4/3 overflow-hidden bg-forest-100">
                 <Image
                     src={image}
-                    alt={name}
+                    alt={`${name} — DecoJade`}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={priority}
+                    className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                 />
+                {/* Velo inferior: asienta el badge y da profundidad sin lavar la foto */}
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-forest-950/45 to-transparent" />
 
                 {badge && (
-                    <div className="absolute top-4 left-4">
-                        <span className="bg-[#2F855A] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg backdrop-blur-md bg-opacity-90 tracking-wide uppercase">
-                            {badge}
-                        </span>
-                    </div>
+                    <span
+                        className={`absolute top-4 left-4 kicker px-3 py-1.5 rounded-full backdrop-blur-md ${
+                            featured
+                                ? 'bg-clay-500 text-bone-50'
+                                : 'bg-bone-50/90 text-forest-800'
+                        }`}
+                    >
+                        {badge}
+                    </span>
                 )}
             </div>
 
-            {/* Content */}
-            <div className="p-8">
-                <h3 className="font-bold text-2xl text-[#1C4532] mb-3 group-hover:text-[#2F855A] transition-colors">
-                    {name}
-                </h3>
+            <div className="flex flex-1 flex-col p-6 sm:p-7">
+                <div className="mb-4">
+                    {subtitle && <span className="kicker text-clay-600">{subtitle}</span>}
+                    <h3 className="t-sub text-forest-900 mt-1.5 group-hover:text-forest-600 transition-colors">
+                        {name}
+                    </h3>
+                </div>
 
-                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                <p className="text-[0.94rem] leading-relaxed text-forest-800/80 mb-6">
                     {description}
                 </p>
 
-                {/* Benefits */}
-                <ul className="mb-8 space-y-3">
-                    {benefits && benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-center gap-3 text-sm text-gray-500">
-                            <div className="w-6 h-6 rounded-full bg-green-50 text-[#2F855A] flex items-center justify-center shrink-0">
-                                <span className="text-xs">✓</span>
-                            </div>
+                <ul className="space-y-2.5 mb-7">
+                    {benefits?.map((benefit) => (
+                        <li key={benefit} className="flex items-start gap-2.5 text-sm text-forest-800/80">
+                            <Check size={15} strokeWidth={3} className="mt-1 shrink-0 text-forest-500" />
                             {benefit}
                         </li>
                     ))}
                 </ul>
 
-                <div className="flex items-center justify-between mt-auto">
-                    <span className="text-2xl font-bold text-[#1C4532]">{formatPrice(price)}</span>
+                <div className="mt-auto flex items-end justify-between gap-4 pt-5 border-t border-forest-900/10">
+                    <div className="min-w-0">
+                        <span className="block font-display text-3xl leading-none text-forest-900 tnum">
+                            {displayPrice}
+                        </span>
+                        {/* La nota ocupa su línea siempre: así los pies de
+                            todas las tarjetas de una fila quedan alineados. */}
+                        <span className="block text-xs text-forest-800/75 mt-1.5 min-h-[1rem]">
+                            {priceNote || '\u00A0'}
+                        </span>
+                    </div>
 
                     <Link
-                        href={whatsappLink}
+                        href={waLink(message)}
                         target="_blank"
-                        className="inline-flex items-center gap-2 bg-[#1C4532] text-white px-6 py-3 rounded-2xl hover:bg-[#2F855A] transition-colors font-medium shadow-lg shadow-green-900/10"
+                        rel="noopener"
+                        aria-label={`${cta}: ${name}`}
+                        className="shrink-0 inline-flex items-center gap-1.5 bg-forest-800 text-bone-50 text-sm font-semibold pl-5 pr-4 py-3 rounded-full transition-colors hover:bg-forest-600"
                     >
-                        Comprar
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                        {cta}
+                        <ArrowUpRight size={16} strokeWidth={2.5} />
                     </Link>
                 </div>
             </div>

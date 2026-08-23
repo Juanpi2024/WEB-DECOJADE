@@ -3,120 +3,166 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { Menu, X, MessageCircle } from 'lucide-react';
+import { waLink } from '@/lib/products';
+
+const navLinks = [
+    { name: 'Catálogo', href: '/catalogo' },
+    { name: 'Cuidados', href: '/cuidados' },
+    { name: 'Feng Shui', href: '/#feng-shui' },
+    { name: 'Por mayor', href: '/#mayoreo' },
+];
 
 export default function Header() {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [open, setOpen] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        const onScroll = () => setScrolled(window.scrollY > 24);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    const navLinks = [
-        { name: 'Inicio', href: '/' },
-        { name: 'Catálogo', href: '/catalogo' },
-        { name: 'Cuidados', href: '/cuidados' },
-        { name: 'Feng Shui', href: '/#feng-shui' },
-    ];
+    // Bloquea el scroll del fondo mientras el menú móvil está abierto
+    useEffect(() => {
+        document.body.style.overflow = open ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [open]);
+
+    // La home tiene hero oscuro a pantalla completa: el header parte transparente.
+    // El resto de las páginas parten con fondo claro, así que va sólido desde arriba.
+    const overHero = pathname === '/' && !scrolled;
 
     return (
-        <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                ? 'bg-white shadow-md py-3'
-                : 'bg-transparent py-4'
+        <>
+            <header
+                className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+                    overHero
+                        ? 'bg-transparent py-4'
+                        : 'bg-bone-100/93 backdrop-blur-xl py-2.5 shadow-[0_1px_0_0_rgba(31,51,36,0.08)]'
                 }`}
-        >
-            <div className="container mx-auto px-6 flex items-center justify-between">
-                {/* Logo */}
-                <Link href="/" className="flex items-center gap-3">
-                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-green-500 shadow-lg transition-transform hover:scale-105 duration-300">
-                        <Image
-                            src="/logo_decojade.jpg"
-                            alt="DecoJade Logo"
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-                </Link>
+            >
+                <div className="container flex items-center justify-between gap-4">
+                    <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="DecoJade — inicio">
+                        <span className={`relative block rounded-full overflow-hidden transition-all duration-500 ring-1 ${
+                            overHero
+                                ? 'w-14 h-14 ring-white/40'
+                                : 'w-11 h-11 ring-forest-900/15'
+                        }`}>
+                            <Image src="/logo_decojade.jpg" alt="" fill sizes="56px" className="object-cover" priority />
+                        </span>
+                        <span className="hidden sm:block leading-none">
+                            <span className={`block font-display text-xl transition-colors ${overHero ? 'text-bone-100' : 'text-forest-900'}`}>
+                                DecoJade
+                            </span>
+                            <span className={`kicker text-[0.6rem] transition-colors ${overHero ? 'text-bone-100/60' : 'text-forest-600'}`}>
+                                Vivero · Parral
+                            </span>
+                        </span>
+                    </Link>
 
-                {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link) => (
+                    <nav className="hidden lg:flex items-center gap-1">
+                        {navLinks.map((link) => {
+                            const active = pathname === link.href;
+                            return (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                                        overHero
+                                            ? 'text-bone-100/80 hover:text-white hover:bg-white/10'
+                                            : 'text-forest-800 hover:text-forest-600 hover:bg-forest-900/5'
+                                    } ${active ? 'font-semibold' : ''}`}
+                                >
+                                    {link.name}
+                                    {active && (
+                                        <span className={`absolute left-4 right-4 -bottom-0.5 h-px ${overHero ? 'bg-white/70' : 'bg-clay-500'}`} />
+                                    )}
+                                </Link>
+                            );
+                        })}
+                    </nav>
+
+                    <div className="flex items-center gap-2">
                         <Link
-                            key={link.name}
-                            href={link.href}
-                            className={`font-medium transition-colors ${isScrolled
-                                ? 'text-gray-700 hover:text-green-600'
-                                : 'text-white/90 hover:text-white'
-                                }`}
+                            href={waLink('Hola! Me interesa una planta de jade')}
+                            target="_blank"
+                            rel="noopener"
+                            className={`hidden sm:inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 ${
+                                overHero
+                                    ? 'bg-bone-100 text-forest-900 hover:bg-white'
+                                    : 'bg-forest-800 text-bone-100 hover:bg-forest-600'
+                            }`}
                         >
-                            {link.name}
+                            <MessageCircle size={16} strokeWidth={2.2} />
+                            Escribir
                         </Link>
-                    ))}
-                </nav>
 
-                {/* CTA Button */}
-                <Link
-                    href="https://wa.me/56984668005?text=Hola! Me interesa una planta de Jade"
-                    target="_blank"
-                    className={`hidden md:inline-flex items-center gap-2 font-semibold px-5 py-2.5 rounded-lg transition-all ${isScrolled
-                        ? 'bg-green-600 text-white hover:bg-green-700'
-                        : 'bg-white text-green-700 hover:bg-gray-100'
-                        }`}
+                        <button
+                            onClick={() => setOpen(true)}
+                            aria-label="Abrir menú"
+                            className={`lg:hidden p-2.5 rounded-full transition-colors ${
+                                overHero ? 'text-bone-100 hover:bg-white/10' : 'text-forest-900 hover:bg-forest-900/5'
+                            }`}
+                        >
+                            <Menu size={22} />
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {/* Menú móvil a pantalla completa */}
+            <div
+                className={`fixed inset-0 z-[60] lg:hidden transition-opacity duration-300 ${
+                    open ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+                }`}
+            >
+                <div className="absolute inset-0 bg-forest-950/60 backdrop-blur-sm" onClick={() => setOpen(false)} />
+                <div
+                    className={`absolute inset-y-0 right-0 w-full max-w-sm bg-bone-100 flex flex-col transition-transform duration-300 ease-out ${
+                        open ? 'translate-x-0' : 'translate-x-full'
+                    }`}
                 >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    Contactar
-                </Link>
-
-                {/* Mobile Menu Button */}
-                <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className={`md:hidden p-2 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
-                    aria-label="Menu"
-                >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {isMobileMenuOpen ? (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        ) : (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        )}
-                    </svg>
-                </button>
-            </div>
-
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
-                    <nav className="flex flex-col p-4">
-                        {navLinks.map((link) => (
+                    <div className="flex items-center justify-between px-6 py-5 border-b border-forest-900/10">
+                        <span className="font-display text-2xl text-forest-900">DecoJade</span>
+                        <button onClick={() => setOpen(false)} aria-label="Cerrar menú" className="p-2 -mr-2 text-forest-800">
+                            <X size={24} />
+                        </button>
+                    </div>
+                    <nav className="flex-1 px-6 py-4 overflow-y-auto">
+                        {navLinks.map((link, i) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="text-gray-700 hover:text-green-600 font-medium py-3 border-b border-gray-50"
+                                onClick={() => setOpen(false)}
+                                className="flex items-baseline gap-4 py-4 border-b border-forest-900/8 group"
                             >
-                                {link.name}
+                                <span className="kicker text-clay-600 tnum">0{i + 1}</span>
+                                <span className="font-display text-2xl text-forest-900 group-hover:text-forest-600 transition-colors">
+                                    {link.name}
+                                </span>
                             </Link>
                         ))}
-                        <Link
-                            href="https://wa.me/56984668005"
-                            target="_blank"
-                            className="flex items-center justify-center gap-2 bg-green-600 text-white font-semibold py-3 rounded-lg mt-4"
-                        >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            WhatsApp
-                        </Link>
                     </nav>
+                    <div className="p-6 border-t border-forest-900/10">
+                        <Link
+                            href={waLink('Hola! Me interesa una planta de jade')}
+                            target="_blank"
+                            rel="noopener"
+                            className="flex items-center justify-center gap-2 w-full bg-forest-800 text-bone-100 font-semibold py-4 rounded-full"
+                        >
+                            <MessageCircle size={18} />
+                            Escribir por WhatsApp
+                        </Link>
+                        <p className="text-center text-xs text-forest-800/75 mt-4">
+                            Tarapacá #17, Parral · +56 9 8466 8005
+                        </p>
+                    </div>
                 </div>
-            )}
-        </header>
+            </div>
+        </>
     );
 }

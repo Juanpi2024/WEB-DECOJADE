@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Phone } from 'lucide-react';
@@ -68,36 +67,28 @@ export default function Chatbot() {
 
     return (
         <>
-            {/* Floating Button */}
+            {/* Lanzador del chat.
+                Antes era una foto de bonsái sobre una caja blanca: se veía
+                pegada encima del sitio. Ahora usa la paleta de la marca y
+                ocupa lo que debe ocupar un botón flotante. */}
             <motion.button
-                className="fixed bottom-6 right-6 z-50 group"
+                className="fixed bottom-5 right-5 z-50 group flex items-center gap-2.5 rounded-full bg-forest-800 text-bone-100 pl-4 pr-5 py-3 shadow-[0_12px_32px_-10px_rgba(19,31,23,0.7)] ring-1 ring-bone-100/15"
                 onClick={() => setIsOpen(!isOpen)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                aria-label={isOpen ? 'Cerrar el chat' : 'Abrir el chat con el experto DecoJade'}
             >
-                <div className="relative w-24 h-24 md:w-28 md:h-28 drop-shadow-2xl filter hover:brightness-110 transition-all">
-                    {/* Glowing effect behind */}
-                    <div className="absolute inset-0 bg-green-500 rounded-full blur-xl opacity-20 group-hover:opacity-40 animate-pulse"></div>
-
-                    {isOpen ? (
-                        <div className="w-full h-full bg-[#2d5a3c] rounded-full flex items-center justify-center border-4 border-white shadow-xl">
-                            <X size={40} className="text-white" />
-                        </div>
-                    ) : (
-                        <div className="relative w-full h-full">
-                            <Image
-                                src="/jade_plant_bonsai_1765587408143.png"
-                                alt="Chat con Experto"
-                                fill
-                                className="object-contain drop-shadow-xl"
-                            />
-                            {/* Speech bubble hint */}
-                            <div className="absolute -top-2 -left-2 bg-white text-[#2d5a3c] text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-green-100 animate-bounce">
-                                ¡Pregúntame!
-                            </div>
-                        </div>
-                    )}
-                </div>
+                {isOpen ? (
+                    <X size={20} strokeWidth={2.2} />
+                ) : (
+                    <>
+                        <span className="relative flex h-2.5 w-2.5 shrink-0">
+                            <span className="absolute inline-flex h-full w-full rounded-full bg-olive-400 opacity-70 animate-ping" />
+                            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-olive-400" />
+                        </span>
+                        <span className="text-sm font-semibold whitespace-nowrap">Pregúntame</span>
+                    </>
+                )}
             </motion.button>
 
             {/* Chat Window */}
@@ -107,22 +98,22 @@ export default function Chatbot() {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col border border-gray-200"
+                        className="fixed bottom-20 right-5 w-[min(22rem,calc(100vw-2.5rem))] bg-bone-50 rounded-card shadow-2xl z-50 overflow-hidden flex flex-col ring-1 ring-forest-900/12"
                         style={{ maxHeight: 'calc(100vh - 120px)' }}
                     >
                         {/* Header */}
-                        <div className="bg-[#2d5a3c] p-4 text-white flex justify-between items-center">
+                        <div className="bg-forest-800 p-4 text-bone-100 flex justify-between items-center">
                             <div>
-                                <h3 className="font-bold text-lg">Experto DecoJade 🌿</h3>
-                                <p className="text-xs text-green-100">Asesoría y Ventas</p>
+                                <h3 className="font-display text-xl">Experto DecoJade</h3>
+                                <p className="text-xs text-bone-100/60">Asesoría y precios al día</p>
                             </div>
-                            <button onClick={openWhatsApp} className="bg-green-500 hover:bg-green-600 p-2 rounded-full transition text-white" title="Ir a WhatsApp">
+                            <button onClick={openWhatsApp} className="bg-olive-400 hover:bg-bone-100 p-2 rounded-full transition text-forest-950" title="Ir a WhatsApp">
                                 <Phone size={18} />
                             </button>
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 bg-gray-50 space-y-4 h-96">
+                        <div className="flex-1 overflow-y-auto p-4 bg-bone-100 space-y-4 h-96">
                             {messages.map((msg, idx) => (
                                 <div
                                     key={idx}
@@ -130,8 +121,8 @@ export default function Chatbot() {
                                 >
                                     <div
                                         className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.role === 'user'
-                                            ? 'bg-[#2d5a3c] text-white rounded-br-none'
-                                            : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
+                                            ? 'bg-forest-800 text-bone-100 rounded-br-none'
+                                            : 'bg-bone-50 ring-1 ring-forest-900/10 text-forest-900 rounded-bl-none shadow-sm'
                                             }`}
                                     >
                                         {msg.content}
@@ -140,7 +131,7 @@ export default function Chatbot() {
                             ))}
                             {isLoading && (
                                 <div className="flex justify-start">
-                                    <div className="bg-gray-100 p-3 rounded-2xl rounded-bl-none text-gray-500 text-sm italic">
+                                    <div className="bg-bone-50 ring-1 ring-forest-900/10 p-3 rounded-2xl rounded-bl-none text-forest-800/80 text-sm italic">
                                         Escribiendo...
                                     </div>
                                 </div>
@@ -149,27 +140,27 @@ export default function Chatbot() {
                         </div>
 
                         {/* Input */}
-                        <div className="p-3 bg-white border-t border-gray-100 flex gap-2">
+                        <div className="p-3 bg-bone-50 border-t border-forest-900/10 flex gap-2">
                             <input
                                 type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={handleKeyDown}
                                 placeholder="Pregunta sobre cuidados..."
-                                className="flex-1 p-2 border border-gray-300 rounded-full focus:outline-none focus:border-[#2d5a3c] px-4 text-sm text-gray-800"
+                                className="flex-1 p-2 border border-forest-900/20 rounded-full focus:outline-none focus:border-forest-600 px-4 text-sm text-forest-900"
                             />
                             <button
                                 onClick={handleSend}
                                 disabled={isLoading}
-                                className="bg-[#2d5a3c] text-white p-2 rounded-full hover:bg-[#234730] disabled:opacity-50 transition"
+                                className="bg-forest-800 text-bone-100 p-2 rounded-full hover:bg-forest-600 disabled:opacity-50 transition"
                             >
                                 <Send size={20} />
                             </button>
                         </div>
 
                         {/* Footer */}
-                        <div className="bg-gray-50 p-2 text-center border-t border-gray-100">
-                            <button onClick={openWhatsApp} className="text-xs text-[#2d5a3c] font-semibold hover:underline">
+                        <div className="bg-bone-100 p-2 text-center border-t border-forest-900/10">
+                            <button onClick={openWhatsApp} className="text-xs text-forest-700 font-semibold hover:underline">
                                 ¿Prefieres hablar con un humano? Click aquí
                             </button>
                         </div>
