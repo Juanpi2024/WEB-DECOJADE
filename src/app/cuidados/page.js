@@ -241,22 +241,22 @@ const careGuides = [
 ];
 
 const colorClasses = {
-    amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-600', iconBg: 'bg-amber-100' },
-    blue: { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-600', iconBg: 'bg-blue-100' },
-    rose: { bg: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-600', iconBg: 'bg-rose-100' },
-    orange: { bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-600', iconBg: 'bg-orange-100' },
-    green: { bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-600', iconBg: 'bg-green-100' },
-    purple: { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-600', iconBg: 'bg-purple-100' },
-    red: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-600', iconBg: 'bg-red-100' },
+    amber: { bg: 'bg-clay-100', border: 'border-clay-200', text: 'text-clay-700', iconBg: 'bg-clay-200' },
+    blue: { bg: 'bg-forest-50', border: 'border-forest-200', text: 'text-forest-700', iconBg: 'bg-forest-100' },
+    rose: { bg: 'bg-bone-200', border: 'border-bone-400', text: 'text-clay-700', iconBg: 'bg-bone-300' },
+    orange: { bg: 'bg-clay-100', border: 'border-clay-200', text: 'text-clay-700', iconBg: 'bg-clay-200' },
+    green: { bg: 'bg-forest-50', border: 'border-forest-200', text: 'text-forest-700', iconBg: 'bg-forest-100' },
+    purple: { bg: 'bg-bone-200', border: 'border-bone-400', text: 'text-forest-700', iconBg: 'bg-bone-300' },
+    red: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-700', iconBg: 'bg-red-100' },
 };
 
 export default function CuidadosPage() {
     return (
         <>
             {/* Hero - Clean Professional Style */}
-            <section className="pt-28 pb-16 bg-gradient-to-br from-[#1C4532] to-[#2F855A]">
+            <section className="pt-36 pb-20 bg-forest-900 grain relative overflow-hidden">
                 <div className="container mx-auto px-6">
-                    <nav className="flex items-center gap-2 text-green-200 text-sm mb-6">
+                    <nav className="flex items-center gap-2 text-olive-300 text-sm mb-6">
                         <Link href="/" className="hover:text-white transition-colors">Inicio</Link>
                         <span>/</span>
                         <span className="text-white">Guía de Cuidados</span>
@@ -270,7 +270,7 @@ export default function CuidadosPage() {
                         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
                             Cuidados del Jade
                         </h1>
-                        <p className="text-green-100 text-lg leading-relaxed max-w-2xl">
+                        <p className="text-bone-100/70 text-lg leading-relaxed max-w-2xl">
                             Todo lo que necesitas saber para que tu planta de Jade (Crassula ovata)
                             viva décadas y luzca espectacular.
                         </p>
@@ -288,12 +288,12 @@ export default function CuidadosPage() {
                             { icon: icons.thermometer, label: 'Temp.', value: '15-24°C', color: 'rose' },
                             { icon: icons.pot, label: 'Drenaje', value: 'Obligatorio', color: 'orange' },
                         ].map((item) => (
-                            <div key={item.label} className="bg-white rounded-2xl p-5 shadow-lg border border-gray-100 text-center">
+                            <div key={item.label} className="bg-white rounded-2xl p-5 shadow-lg border border-forest-900/10 text-center">
                                 <div className={`w-14 h-14 mx-auto rounded-2xl ${colorClasses[item.color].iconBg} ${colorClasses[item.color].text} flex items-center justify-center mb-3`}>
                                     {item.icon}
                                 </div>
-                                <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{item.label}</p>
-                                <p className="font-bold text-gray-800">{item.value}</p>
+                                <p className="text-xs text-forest-800/75 uppercase tracking-wide mb-1">{item.label}</p>
+                                <p className="font-bold text-forest-900">{item.value}</p>
                             </div>
                         ))}
                     </div>
@@ -304,18 +304,18 @@ export default function CuidadosPage() {
             <section className="py-12 bg-[#F5F1E8]">
                 <div className="container mx-auto px-6">
                     <div className="max-w-5xl mx-auto">
-                        <h2 className="text-2xl font-bold text-[#1C4532] mb-6 text-center">Índice de Contenidos</h2>
+                        <h2 className="text-2xl font-bold text-[var(--color-forest-900)] mb-6 text-center">Índice de Contenidos</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                             {careGuides.map((guide) => (
                                 <a
                                     key={guide.id}
                                     href={`#${guide.id}`}
-                                    className={`p-4 bg-white hover:${colorClasses[guide.color].bg} rounded-xl border border-gray-100 hover:${colorClasses[guide.color].border} transition-all text-center group cursor-pointer`}
+                                    className={`p-4 bg-white hover:${colorClasses[guide.color].bg} rounded-xl border border-forest-900/10 hover:${colorClasses[guide.color].border} transition-all text-center group cursor-pointer`}
                                 >
                                     <div className={`w-12 h-12 mx-auto rounded-xl ${colorClasses[guide.color].iconBg} ${colorClasses[guide.color].text} flex items-center justify-center mb-2 group-hover:scale-110 transition-transform`}>
                                         {guide.icon}
                                     </div>
-                                    <span className="font-medium text-gray-800 text-sm block">{guide.title}</span>
+                                    <span className="font-medium text-forest-900 text-sm block">{guide.title}</span>
                                 </a>
                             ))}
                         </div>
@@ -340,18 +340,18 @@ export default function CuidadosPage() {
                                             {guide.icon}
                                         </div>
                                         <div className="flex-1">
-                                            <h2 className="text-2xl font-bold text-gray-900">{guide.title}</h2>
+                                            <h2 className="text-2xl font-bold text-forest-900">{guide.title}</h2>
                                             <p className={`${colorClasses[guide.color].text} font-medium`}>{guide.shortDesc}</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Key Points Bar - More spaced out */}
-                                <div className="grid grid-cols-3 divide-x divide-gray-100 bg-gray-50/50 border-b border-gray-100">
+                                <div className="grid grid-cols-3 divide-x divide-gray-100 bg-bone-100/50 border-b border-forest-900/10">
                                     {guide.keyPoints.map((point) => (
                                         <div key={point.label} className="p-4 text-center hover:bg-white transition-colors">
-                                            <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{point.label}</p>
-                                            <p className="font-bold text-gray-800 text-sm">{point.value}</p>
+                                            <p className="text-xs text-forest-800/75 uppercase tracking-wide mb-1">{point.label}</p>
+                                            <p className="font-bold text-forest-900 text-sm">{point.value}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -361,23 +361,23 @@ export default function CuidadosPage() {
                                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                                         {guide.content.map((section, i) => {
                                             // Determine styles based on section type
-                                            let cardBg = 'bg-gray-50';
-                                            let titleColor = 'text-gray-800';
+                                            let cardBg = 'bg-bone-100';
+                                            let titleColor = 'text-forest-900';
                                             let icon = icons.check;
                                             let iconColor = colorClasses[guide.color].text;
 
                                             if (section.type === 'ideal') {
-                                                cardBg = 'bg-green-50/50 border border-green-100';
-                                                titleColor = 'text-green-800';
+                                                cardBg = 'bg-forest-50 border border-forest-200';
+                                                titleColor = 'text-forest-900';
                                                 icon = icons.check;
-                                                iconColor = 'text-green-600';
+                                                iconColor = 'text-forest-700';
                                             } else if (section.type === 'warning') {
-                                                cardBg = 'bg-amber-50/50 border border-amber-100';
-                                                titleColor = 'text-amber-800';
+                                                cardBg = 'bg-clay-100 border border-clay-200';
+                                                titleColor = 'text-clay-700';
                                                 icon = icons.warning;
-                                                iconColor = 'text-amber-600';
+                                                iconColor = 'text-clay-600';
                                             } else if (section.type === 'danger') {
-                                                cardBg = 'bg-red-50/50 border border-red-100';
+                                                cardBg = 'bg-red-50 border border-red-200';
                                                 titleColor = 'text-red-800';
                                                 icon = icons.stop;
                                                 iconColor = 'text-red-600';
@@ -391,7 +391,7 @@ export default function CuidadosPage() {
                                                     </h3>
                                                     <ul className="space-y-3">
                                                         {section.items.map((item, j) => (
-                                                            <li key={j} className="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                                                            <li key={j} className="flex items-start gap-2 text-sm text-forest-800/80 leading-relaxed">
                                                                 <span className={`mt-0.5 shrink-0 ${iconColor} opacity-70`}>•</span>
                                                                 {item}
                                                             </li>
@@ -416,7 +416,7 @@ export default function CuidadosPage() {
                                         </h4>
                                         <div className="flex flex-wrap gap-3 relative z-10">
                                             {guide.tips.map((tip, i) => (
-                                                <span key={i} className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm text-gray-700 shadow-sm border border-gray-100">
+                                                <span key={i} className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm text-forest-800/80 shadow-sm border border-forest-900/10">
                                                     <span className={`${colorClasses[guide.color].text}`}>{icons.check}</span>
                                                     {tip}
                                                 </span>
@@ -431,17 +431,17 @@ export default function CuidadosPage() {
             </section>
 
             {/* CTA */}
-            <section className="py-20 bg-[#1C4532] text-white">
+            <section className="py-20 bg-[var(--color-forest-900)] text-white">
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-3xl lg:text-4xl font-bold mb-4">¿Necesitas ayuda con tu Jade?</h2>
-                    <p className="text-green-200 mb-8 max-w-md mx-auto">
+                    <p className="text-olive-300 mb-8 max-w-md mx-auto">
                         Somos especialistas. Te asesoramos gratis por WhatsApp sobre cualquier
                         problema o duda con tu planta.
                     </p>
                     <Link
                         href="https://wa.me/56984668005?text=Hola! Necesito ayuda con el cuidado de mi planta de Jade"
                         target="_blank"
-                        className="inline-flex items-center gap-3 px-10 py-4 bg-[#F5F1E8] text-[#1C4532] font-bold rounded-2xl shadow-2xl hover:scale-105 transition-transform cursor-pointer"
+                        className="inline-flex items-center gap-3 px-10 py-4 bg-[#F5F1E8] text-[var(--color-forest-900)] font-bold rounded-2xl shadow-2xl hover:scale-105 transition-transform cursor-pointer"
                     >
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
