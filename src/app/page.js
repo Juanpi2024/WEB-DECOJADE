@@ -35,9 +35,9 @@ export default function Home() {
             </span>
 
             <h1 className="t-hero text-bone-100 mb-7">
-              El jade no se compra.
+              Regala un árbol
               <br />
-              <span className="text-olive-400 italic">Se hereda.</span>
+              <span className="text-olive-400 italic">que se hereda.</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-bone-100/75 leading-relaxed max-w-xl mb-10">
