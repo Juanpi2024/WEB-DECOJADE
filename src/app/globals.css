@@ -1,242 +1,228 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-/* Tailwind v4 Theme Configuration */
+/* ============================================================
+   DECOJADE — SISTEMA DE DISEÑO
+   Paleta muestreada del logo original de la marca:
+   verde bosque #527756 · crema #FAF7EE · terracota #AE7B50 · oliva #A8B982
+
+   NOTA IMPORTANTE para quien edite este archivo:
+   todo lo que no vaya dentro de @layer le gana a las utilidades de
+   Tailwind. Si escribes una regla suelta como `* { padding: 0 }`,
+   revientas todos los `p-4`, `px-8`, etc. del sitio entero.
+   Estilos de elemento -> @layer base. Clases propias -> @layer components.
+   ============================================================ */
+
 @theme {
-  --color-jade-50: #f0fdf4;
-  --color-jade-100: #dcfce7;
-  --color-jade-200: #bbf7d0;
-  --color-jade-300: #86efac;
-  --color-jade-400: #4ade80;
-  --color-jade-500: #22c55e;
-  --color-jade-600: #16a34a;
-  --color-jade-700: #15803d;
-  --color-jade-800: #166534;
-  --color-jade-900: #14532d;
-}
+  /* Verde bosque — color madre de la marca */
+  --color-forest-50:  #F3F7F3;
+  --color-forest-100: #E4EDE5;
+  --color-forest-200: #C8DACB;
+  --color-forest-300: #A3C0A8;
+  --color-forest-400: #79A180;
+  --color-forest-500: #5D8763;
+  --color-forest-600: #527756;
+  --color-forest-700: #3F5F44;
+  --color-forest-800: #2E4733;
+  --color-forest-900: #1F3324;
+  --color-forest-950: #131F17;
 
-/* ========================================
-   DECOJADE - PROFESSIONAL E-COMMERCE DESIGN
-   ======================================== */
+  /* Crema / hueso — el fondo del emblema */
+  --color-bone-50:  #FDFCF8;
+  --color-bone-100: #FAF7EE;
+  --color-bone-200: #F3EEE0;
+  --color-bone-300: #E9E1CD;
+  --color-bone-400: #DACFB4;
 
-:root {
-  /* Primary - Vibrant Green */
-  --primary: #22c55e;
-  --primary-dark: #16a34a;
-  --primary-light: #86efac;
-  
-  /* Neutrals - Clean and Professional */
-  --white: #ffffff;
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-  
-  /* Accent */
-  --gold: #f59e0b;
-  
-  /* Typography */
+  /* Terracota — la guirnalda del logo, acento cálido */
+  --color-clay-100: #F5E8DC;
+  --color-clay-200: #E7CFB6;
+  --color-clay-300: #D2AC85;
+  --color-clay-400: #BE9166;
+  --color-clay-500: #AE7B50;
+  --color-clay-600: #8E6140;
+  --color-clay-700: #6B4830;
+
+  /* Oliva — hojas claras de la guirnalda */
+  --color-olive-300: #C6D2AB;
+  --color-olive-400: #A8B982;
+  --color-olive-500: #8A9C63;
+  --color-olive-600: #6E7D4C;
+
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'DM Serif Display', Georgia, serif;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  --radius-card: 1.25rem;
 }
 
-/* Base Reset */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+    /* clip, no hidden: mata el scroll horizontal fantasma sin romper position:fixed */
+    overflow-x: clip;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bone-200);
+    color: var(--color-forest-950);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-clay-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: var(--color-olive-400);
+    color: var(--color-forest-950);
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-bone-200); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-forest-300);
+    border-radius: 999px;
+    border: 2px solid var(--color-bone-200);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-forest-500); }
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
+@layer components {
+  /* Contenedor maestro */
+  .container {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  /* Escala fluida: un solo tamaño que respira de móvil a desktop */
+  .t-hero    { font-size: clamp(2.5rem, 6.6vw, 4.75rem); line-height: 1.02; letter-spacing: -0.03em; }
+  .t-section { font-size: clamp(1.9rem, 4vw, 2.9rem); }
+  .t-sub     { font-size: clamp(1.3rem, 2.2vw, 1.6rem); line-height: 1.15; }
+
+  /* Cifras alineadas en columna: precios y estadísticas */
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  /* Kicker — la etiqueta chica sobre cada titular */
+  .kicker {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  /* Grano sutil: evita que los planos de color se vean plásticos */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.34'/%3E%3C/svg%3E");
+  }
+
+  /* Regla decorativa con una hoja al centro */
+  .rule-leaf {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: var(--color-forest-300);
+  }
+  .rule-leaf::before,
+  .rule-leaf::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: currentColor;
+    opacity: 0.55;
+  }
+
+  /* Deriva lentísima del fondo del hero — da vida sin distraer */
+  .drift { animation: drift 20s ease-in-out infinite; }
+
+  /* Slider del cotizador por mayor.
+     El control nativo se ve a desgano; este se ve parte de la marca. */
+  .range-jade {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2.25rem;
+    background: transparent;
+    cursor: pointer;
+  }
+  .range-jade::-webkit-slider-runnable-track {
+    height: 0.4rem;
+    border-radius: 999px;
+    background:
+      linear-gradient(to right,
+        var(--color-olive-400) 0 var(--range-pct, 0%),
+        color-mix(in srgb, var(--color-bone-100) 16%, transparent) var(--range-pct, 0%) 100%);
+  }
+  .range-jade::-moz-range-track {
+    height: 0.4rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-bone-100) 16%, transparent);
+  }
+  .range-jade::-moz-range-progress {
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--color-olive-400);
+  }
+  .range-jade::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: -0.6rem;
+    border-radius: 999px;
+    background: var(--color-olive-400);
+    border: 3px solid var(--color-forest-950);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-olive-400) 55%, transparent);
+    transition: transform 0.15s ease;
+  }
+  .range-jade::-moz-range-thumb {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 999px;
+    background: var(--color-olive-400);
+    border: 3px solid var(--color-forest-950);
+  }
+  .range-jade:active::-webkit-slider-thumb { transform: scale(1.12); }
 }
 
-body {
-  font-family: var(--font-sans);
-  background-color: var(--white);
-  color: var(--gray-800);
-  line-height: 1.6;
+@keyframes drift {
+  0%, 100% { transform: scale(1.02) translate3d(0, 0, 0); }
+  50%      { transform: scale(1.07) translate3d(0, -1.2%, 0); }
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  color: var(--gray-900);
-  line-height: 1.2;
-}
-
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-
-/* Container */
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: 0.5rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-secondary {
-  background-color: white;
-  color: var(--gray-800);
-  border: 1px solid var(--gray-200);
-}
-
-.btn-secondary:hover {
-  background-color: var(--gray-50);
-  border-color: var(--gray-300);
-}
-
-.btn-white {
-  background-color: white;
-  color: var(--gray-900);
-}
-
-.btn-white:hover {
-  background-color: var(--gray-50);
-}
-
-.btn-lg {
-  padding: 1rem 2rem;
-  font-size: 1rem;
-}
-
-/* Cards */
-.card {
-  background: white;
-  border-radius: 1rem;
-  border: 1px solid var(--gray-100);
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
-}
-
-/* Section */
-.section {
-  padding: 5rem 0;
-}
-
-.section-gray {
-  background-color: var(--gray-50);
-}
-
-/* Badge */
-.badge {
-  display: inline-flex;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  background-color: var(--primary);
-  color: white;
-}
-
-.badge-gold {
-  background-color: var(--gold);
-  color: white;
-}
-
-/* Animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* WhatsApp Pulse */
-@keyframes pulse-ring {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
-
-/* Selection */
-::selection {
-  background-color: var(--primary-light);
-  color: var(--gray-900);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--gray-100);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--gray-300);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--gray-400);
-}
-
-/* Focus */
-:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-/* Link */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .section {
-    padding: 3rem 0;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

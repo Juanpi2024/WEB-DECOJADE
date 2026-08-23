@@ -1,302 +1,361 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import ProductCard from '@/components/ProductCard';
-
-const products = [
-  {
-    id: 'jade-1-ano',
-    name: 'Jade Nueva (1 Año)',
-    description: 'Planta joven con gran potencial. Perfecta para comenzar a cuidar.',
-    price: 1000,
-    image: '/jade_1000_real.png',
-    badge: 'Económica',
-    benefits: ['1 Año de Edad', 'Raíz establecida', 'Ideal Souvenir']
-  },
-  {
-    id: 'jade-2-anos',
-    name: 'Jade Crecimiento (2 Años)',
-    description: 'Planta de jade en cremecento, 2 años de cultivo. Un detalle lleno de vida.',
-    price: 3000,
-    image: '/jade_3000_real.jpg',
-    badge: 'Oferta Especial',
-    benefits: ['Maceta Cremecento', '2 Años de Edad', 'Ideal Regalo']
-  },
-  {
-    id: 'mediano',
-    name: 'Jade Mediano',
-    description: 'Presencia y armonía. Un equilibrio perfecto de tamaño y belleza.',
-    price: 7000,
-    image: '/jade_real_medium.jpg',
-    badge: 'Más Vendido',
-    benefits: ['15-25 cm aprox', 'Maceta decorativa', 'Sustrato premium']
-  },
-  {
-    id: 'grande',
-    name: 'Jade Grande',
-    description: 'Un árbol de la abundancia. La pieza central que transformará tu hogar.',
-    price: 12000,
-    image: '/jade_real_large.jpg',
-    badge: 'Colección',
-    benefits: ['30+ cm altura', 'Formación tipo bonsái', 'Maceta de cerámica']
-  },
-  {
-    id: 'gigante',
-    name: 'Jade Gigante',
-    description: 'La máxima expresión de prosperidad. Un ejemplar maduro e impactante.',
-    price: 25000,
-    image: '/jade_gigante_real.png',
-    badge: 'Exclusivo',
-    benefits: ['80+ cm altura', 'Tronco leñoso', 'Impacto visual total']
-  }
-];
-
-const testimonials = [
-  { name: 'Claudia M.', role: 'Cliente Feliz', text: 'Hermosas plantas, se nota el amor con el que las cuidan. Mi jade mediano está precioso.', stars: 5 },
-  { name: 'Roberto S.', role: 'Coleccionista', text: 'La calidad es increíble por el precio. El sustrato es perfecto.', stars: 5 },
-  { name: 'Marina V.', role: 'Diseñadora', text: 'Le dio vida a mi oficina. 100% recomendados.', stars: 5 },
-];
+import {
+  Sprout, MapPin, MessageCircle, Boxes,
+  ArrowDown, ArrowUpRight, Check,
+} from 'lucide-react';
+import CatalogExplorer from '@/components/CatalogExplorer';
+import WholesaleCalculator from '@/components/WholesaleCalculator';
+import { waLink } from '@/lib/products';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#F5F1E8]">
-      {/* Organic Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1C4532] to-[#2F855A] pt-40 pb-20 lg:pt-56 lg:pb-32 rounded-b-[3rem] lg:rounded-b-[5rem] shadow-xl">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-          <svg className="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
-          </svg>
-        </div>
+    <>
+      {/* ============================ HERO ============================ */}
+      <section className="relative min-h-[92svh] flex items-end overflow-hidden grain">
+        <Image
+          src="/vivero_hero.jpg"
+          alt="Plantas de jade en maceteros de yeso en el vivero DecoJade de Parral"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center drift"
+        />
+        {/* Doble velo: uno vertical para el texto, uno cálido para unificar el color */}
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/72 to-forest-950/40" />
+        <div className="absolute inset-0 bg-forest-900/25 mix-blend-multiply" />
+        {/* Velo superior: sostiene la legibilidad del header sobre cualquier foto */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-forest-950/70 to-transparent" />
 
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <span className="inline-block bg-white/10 backdrop-blur-md text-[#E2E8F0] font-medium px-4 py-1.5 rounded-full mb-6 border border-white/20">
-            <svg className="w-4 h-4 inline-block mr-1 -mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
-            Vivero Boutique
-          </span>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl mx-auto">
-            Armonía y Abundancia <br />
-            <span className="text-[#9AE6B4]">en cada Hoja</span>
-          </h1>
-          <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto leading-relaxed">
-            Descubre nuestra colección exclusiva de Jades cultivados con dedicación.
-            El toque de naturaleza que tu espacio necesita.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#catalogo"
-              className="inline-flex items-center justify-center bg-[#F5F1E8] text-[#2F855A] font-bold px-8 py-3.5 rounded-2xl hover:bg-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              Ver Colección
-            </a>
-            <a
-              href="https://wa.me/56984668005?text=Hola! Me gustaría asesoría sobre sus jades"
-              target="_blank"
-              className="inline-flex items-center justify-center bg-transparent border-2 border-white/30 text-white font-semibold px-8 py-3.5 rounded-2xl hover:bg-white/10 transition-all backdrop-blur-sm"
-            >
-              Hablar con Experto
-            </a>
+        <div className="container relative z-10 pb-16 pt-40 sm:pb-20">
+          <div className="max-w-3xl">
+            <span className="kicker text-olive-400 flex items-center gap-2.5 mb-6">
+              <span className="w-8 h-px bg-olive-400/60" />
+              Vivero propio · Parral, Maule
+            </span>
+
+            <h1 className="t-hero text-bone-100 mb-7">
+              El jade no se compra.
+              <br />
+              <span className="text-olive-400 italic">Se hereda.</span>
+            </h1>
+
+            <p className="text-lg sm:text-xl text-bone-100/75 leading-relaxed max-w-xl mb-10">
+              Siete años cultivando <em className="not-italic text-bone-100">Crassula ovata</em> desde
+              el esqueje, en maceteros de yeso que hacemos nosotros mismos. Cada planta
+              que vendemos creció acá, en Parral.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-14">
+              <a
+                href="#catalogo"
+                className="inline-flex items-center justify-center gap-2 bg-bone-100 text-forest-900 font-semibold px-8 py-4 rounded-full transition-all hover:bg-white hover:gap-3"
+              >
+                Ver los 7 formatos
+                <ArrowDown size={18} strokeWidth={2.4} />
+              </a>
+              <Link
+                href={waLink('Hola! Quiero preguntar por sus jades')}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center justify-center gap-2 border border-bone-100/30 text-bone-100 font-semibold px-8 py-4 rounded-full backdrop-blur-sm transition-colors hover:bg-bone-100/10"
+              >
+                <MessageCircle size={18} />
+                Preguntar por WhatsApp
+              </Link>
+            </div>
+
+            <dl className="grid grid-cols-3 gap-4 sm:gap-10 max-w-lg border-t border-bone-100/15 pt-7">
+              {[
+                ['+7', 'años cultivando jade'],
+                ['100%', 'producción propia'],
+                ['+1.000', 'plantas por temporada'],
+              ].map(([n, label]) => (
+                <div key={label}>
+                  <dt className="font-display text-2xl sm:text-4xl text-bone-100 tnum leading-none">{n}</dt>
+                  <dd className="text-[0.68rem] sm:text-xs text-bone-100/60 mt-2 leading-snug">{label}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>
 
-      {/* Benefits Bar */}
-      <div className="container mx-auto px-6 -mt-8 relative z-20">
-        <div className="bg-white rounded-3xl shadow-lg p-6 lg:p-8 grid grid-cols-2 lg:grid-cols-4 gap-6 border border-green-50">
+      {/* ======================= BARRA DE CONFIANZA ======================= */}
+      <section className="bg-bone-100 border-b border-forest-900/8">
+        <div className="container grid grid-cols-2 lg:grid-cols-4 divide-x divide-forest-900/8">
           {[
-            {
-              icon: (
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              ),
-              title: 'Cultivo Orgánico',
-              desc: 'Sin químicos nocivos'
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                </svg>
-              ),
-              title: 'Retiro en Vivero',
-              desc: 'Tarapacá #17, Parral'
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              ),
-              title: 'Asesoría Vitalicia',
-              desc: 'Te enseñamos a cuidar'
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              ),
-              title: 'Garantía 30 Días',
-              desc: 'Compra sin riesgo'
-            },
-          ].map((item) => (
-            <div key={item.title} className="flex items-center gap-4 cursor-pointer hover:bg-green-50 p-2 rounded-xl transition-colors">
-              <span className="bg-green-50 w-12 h-12 flex items-center justify-center rounded-2xl">{item.icon}</span>
+            { Icon: Sprout, title: 'Del esqueje al árbol', desc: 'No revendemos. Producimos.' },
+            { Icon: MapPin, title: 'Tarapacá #17, Parral', desc: 'Retiro con visita agendada' },
+            { Icon: MessageCircle, title: 'Asesoría de por vida', desc: 'Te enseñamos a cuidarla' },
+            { Icon: Boxes, title: 'Venta por mayor', desc: 'Desde 30 unidades' },
+          ].map(({ Icon, title, desc }, i) => (
+            <div key={title} className={`flex items-start gap-4 py-8 ${i % 2 === 0 ? 'pr-5 lg:px-7' : 'px-5 lg:px-7'}`}>
+              <Icon size={20} strokeWidth={1.8} className="text-clay-600 shrink-0 mt-1" />
               <div>
-                <h3 className="font-bold text-gray-800 text-sm lg:text-base">{item.title}</h3>
-                <p className="text-xs text-gray-500">{item.desc}</p>
+                <h3 className="font-sans font-semibold text-sm text-forest-900 leading-snug">{title}</h3>
+                <p className="text-xs text-forest-800/80 mt-1">{desc}</p>
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Catalog Section */}
-      <section id="catalogo" className="py-20 lg:py-28">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#1C4532] mb-4">Nuestra Colección</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">Seleccionamos cuidadosamente cada ejemplar. Elige el tamaño que mejor se adapte a tu energía.</p>
+      {/* ============================ CATÁLOGO ============================ */}
+      <section id="catalogo" className="py-24 lg:py-32">
+        <div className="container">
+          <header className="max-w-2xl mb-14">
+            <span className="kicker text-clay-600">El catálogo</span>
+            <h2 className="t-section text-forest-900 mt-3 mb-5">
+              Dos formatos, siete tamaños
+            </h2>
+            <p className="text-forest-800/80 leading-relaxed">
+              Las plantas jóvenes y medianas van en macetero de yeso de producción propia.
+              Las piezas grandes se montan como jardín bonsái en maceta abierta, con piedras
+              y figura incluidas. Los precios son de retiro en el vivero.
+            </p>
+          </header>
+
+          <CatalogExplorer />
+        </div>
+      </section>
+
+      {/* ============================ MAYOREO ============================ */}
+      <section id="mayoreo" className="relative py-24 lg:py-32 bg-forest-900 overflow-hidden grain">
+        <div className="absolute -right-32 -top-32 w-[38rem] h-[38rem] rounded-full bg-forest-800/50 blur-3xl pointer-events-none" />
+
+        <div className="container relative z-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <div>
+            <span className="kicker text-olive-400">Para negocios</span>
+            <h2 className="t-section text-bone-100 mt-3 mb-6">
+              Si vendes plantas, produzcámoslas juntos
+            </h2>
+            <p className="text-bone-100/70 leading-relaxed mb-6">
+              Florerías, tiendas de decoración, organizadores de eventos y empresas que buscan
+              un regalo corporativo que no termine en un cajón. Producimos más de 1.000 plantas
+              por temporada y podemos reservar un lote a tu nombre.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                'Precio por unidad desde 30 plantas',
+                'Mismo macetero de yeso, sin costo extra',
+                'Coordinamos la fecha de entrega con anticipación',
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-3 text-bone-100/80">
+                  <Check size={16} strokeWidth={3} className="mt-1.5 shrink-0 text-olive-400" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-wrap gap-x-10 gap-y-5 border-t border-bone-100/15 pt-7">
+              <div>
+                <span className="font-display text-3xl text-olive-400 tnum leading-none">30</span>
+                <span className="block text-xs text-bone-100/60 mt-1.5">unidades mínimo</span>
+              </div>
+              <div>
+                <span className="font-display text-3xl text-olive-400 tnum leading-none">+1.000</span>
+                <span className="block text-xs text-bone-100/60 mt-1.5">de capacidad por temporada</span>
+              </div>
+              <div>
+                <span className="font-display text-3xl text-olive-400 tnum leading-none">33%</span>
+                <span className="block text-xs text-bone-100/60 mt-1.5">bajo el precio al detalle</span>
+              </div>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          <WholesaleCalculator />
+        </div>
+      </section>
+
+      {/* =========================== FENG SHUI =========================== */}
+      <section id="feng-shui" className="py-24 lg:py-32 bg-bone-100">
+        <div className="container grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <div className="order-2 lg:order-1 relative">
+            <div className="relative aspect-4/5 rounded-card overflow-hidden ring-1 ring-forest-900/10">
+              <Image
+                src="/jade_bonsai_decorado.jpg"
+                alt="Jade montado como jardín bonsái con piedras y figura de buda"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover"
+              />
+            </div>
+            {/* Nota flotante: aterriza el simbolismo en algo concreto */}
+            <div className="absolute -bottom-6 -right-3 sm:-right-6 max-w-[15rem] bg-clay-500 text-bone-50 rounded-2xl p-5 shadow-xl">
+              <p className="font-display text-lg leading-snug">
+                «El que regala un jade está deseando prosperidad, no despachando un trámite.»
+              </p>
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <span className="kicker text-clay-600">Por qué el jade</span>
+            <h2 className="t-section text-forest-900 mt-3 mb-6">
+              La planta que la gente sí conserva
+            </h2>
+            <p className="text-forest-800/80 leading-relaxed mb-5">
+              La <em>Crassula ovata</em> guarda agua en sus hojas carnosas. Por eso perdona
+              el olvido: aguanta semanas sin riego y sigue creciendo. En el Feng Shui esas
+              mismas hojas simbolizan la riqueza que se acumula — de ahí el nombre árbol del dinero.
+            </p>
+            <p className="text-forest-800/80 leading-relaxed mb-8">
+              Traducido a la práctica: es el regalo con la tasa de supervivencia más alta que
+              puedes hacer. Y si igual se te complica, te asesoramos por WhatsApp las veces que haga falta.
+            </p>
+
+            <ul className="space-y-4 mb-9">
+              {[
+                ['Riego', 'Cada 2 o 3 semanas en verano, cada 4 a 6 en invierno.'],
+                ['Luz', 'Cuatro a seis horas de luz al día. Le encanta la ventana.'],
+                ['Vida útil', 'Décadas. Se pone más bonita con los años.'],
+              ].map(([k, v]) => (
+                <li key={k} className="flex flex-col sm:flex-row sm:gap-6 border-b border-forest-900/10 pb-4">
+                  <span className="kicker text-forest-600 sm:w-24 shrink-0 pt-1">{k}</span>
+                  <span className="text-forest-800/75">{v}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="/cuidados"
+              className="inline-flex items-center gap-2 font-semibold text-forest-800 border-b-2 border-clay-500 pb-1 transition-colors hover:text-clay-600"
+            >
+              Guía completa de cuidados
+              <ArrowUpRight size={18} strokeWidth={2.4} />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Why Jade Section (Biophilic) */}
-      <section id="feng-shui" className="py-20 bg-[#E6FFFA] relative overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                <Image
-                  src="/jade_real_collage.jpg"
-                  alt="Jades saludables"
-                  fill
-                  className="object-cover"
+      {/* =========================== HISTORIA =========================== */}
+      <section className="py-24 lg:py-32">
+        <div className="container max-w-3xl text-center">
+          <span className="kicker text-clay-600">Quiénes somos</span>
+          <h2 className="t-section text-forest-900 mt-3 mb-7">
+            Empezamos con una planta
+          </h2>
+          <p className="text-lg text-forest-800/80 leading-relaxed mb-6">
+            Hace más de siete años había un solo jade. Hoy hay cientos, en todas las etapas —
+            esquejes enraizando, plantas de dos años en yeso, ejemplares de tronco grueso
+            montados como bonsái. Todos crecieron en el mismo patio de Parral.
+          </p>
+          <p className="text-forest-800/80 leading-relaxed">
+            No compramos plantas para revender. Eso es lo que nos permite darte un precio
+            honesto y decirte con certeza qué edad tiene lo que te llevas.
+          </p>
+
+          <div className="rule-leaf my-14">
+            <Sprout size={20} className="text-forest-400" />
+          </div>
+
+          {/* Tira editorial: tres momentos del mismo patio, en vez de un
+              collage recortado a la fuerza. */}
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            {[
+              ['/jade_chico_yeso.jpg', 'Plantas de dos años en macetero de yeso', 'aspect-3/4'],
+              ['/vivero_hero.jpg', 'Lotes de jade listos en el vivero de Parral', 'aspect-3/4 mt-6 sm:mt-10'],
+              ['/jade_bonsai_decorado.jpg', 'Ejemplar de tronco grueso montado como jardín bonsái', 'aspect-3/4'],
+            ].map(([src, alt, extra]) => (
+              <div key={src} className={`relative rounded-2xl overflow-hidden ring-1 ring-forest-900/10 ${extra}`}>
+                <Image src={src} alt={alt} fill sizes="(max-width: 640px) 33vw, 240px" className="object-cover" />
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-forest-800/75 mt-6">
+            Esquejes, plantas en yeso y ejemplares montados como bonsái. Todo del mismo patio.
+          </p>
+        </div>
+      </section>
+
+      {/* ============================ VIVERO ============================ */}
+      <section className="py-24 lg:py-32 bg-bone-100">
+        <div className="container">
+          <header className="max-w-2xl mb-12">
+            <span className="kicker text-clay-600">Visítanos</span>
+            <h2 className="t-section text-forest-900 mt-3 mb-5">
+              Elige tu jade en persona
+            </h2>
+            <p className="text-forest-800/80 leading-relaxed">
+              No hay dos ejemplares iguales, sobre todo en los formatos grandes. Si puedes venir,
+              vienes y eliges el tuyo. Eso sí: escríbenos antes para asegurarte de que estemos.
+            </p>
+          </header>
+
+          <div className="grid lg:grid-cols-5 gap-6">
+            <div className="lg:col-span-3 rounded-card overflow-hidden ring-1 ring-forest-900/10 bg-bone-50">
+              <div className="aspect-16/10 relative">
+                <iframe
+                  title="Ubicación del vivero DecoJade en Parral"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src="https://maps.google.com/maps?q=Tarapac%C3%A1+17,+Parral,+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  className="absolute inset-0"
                 />
               </div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <span className="text-[#2F855A] font-bold tracking-wider text-sm uppercase mb-2 block">Filosofía Feng Shui</span>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#1C4532] mb-6">Más que una Planta, un Símbolo</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
-                El Jade (Crassula ovata) es venerado por su capacidad para atraer la prosperidad y renovar las energías.
-                Sus hojas carnosas almacenan agua, simbolizando la acumulación de riqueza y bienestar.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  'Atrae energía Chi positiva a tu hogar',
-                  'Fácil cuidado, ideal para estilos de vida modernos',
-                  'Purifica el aire y armoniza el ambiente'
-                ].map(text => (
-                  <li key={text} className="flex items-center gap-3 text-gray-700">
-                    <span className="w-6 h-6 rounded-full bg-[#38A169] text-white flex items-center justify-center">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                    </span>
-                    {text}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-[#1C4532]">Lo que dicen nuestros clientes</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
-              <div key={i} className="bg-[#F9FAFB] p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition-all cursor-pointer">
-                <div className="flex text-yellow-400 mb-4 gap-1">
-                  {[...Array(5)].map((_, j) => (
-                    <svg key={j} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-6 italic">&quot;{t.text}&quot;</p>
+              <div className="p-7 flex flex-wrap items-end justify-between gap-5">
                 <div>
-                  <p className="font-bold text-[#1C4532]">{t.name}</p>
-                  <p className="text-sm text-gray-400">{t.role}</p>
+                  <span className="kicker text-clay-600">Dirección</span>
+                  <p className="font-display text-2xl text-forest-900 mt-1.5">Calle Tarapacá #17</p>
+                  <p className="text-forest-800/80 text-sm">Parral, Región del Maule</p>
                 </div>
+                <Link
+                  href={waLink('Hola! Quiero agendar una visita al vivero')}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-2 bg-forest-800 text-bone-100 font-semibold px-6 py-3 rounded-full text-sm transition-colors hover:bg-forest-600"
+                >
+                  <MessageCircle size={16} />
+                  Agendar visita
+                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* Location Section */}
-      <section className="py-20 bg-[#F5F1E8]">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1C4532] mb-4">Visita Nuestro Vivero</h2>
-            <p className="text-gray-600">Ven a elegir tu Jade personalmente. Te esperamos en Parral.</p>
-          </div>
-          <div className="bg-white p-6 rounded-3xl shadow-lg max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Map Side */}
-              <div className="w-full h-full flex flex-col">
-                <div className="aspect-video w-full rounded-2xl overflow-hidden relative shadow-md flex-grow">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    loading="lazy"
-                    allowFullScreen
-                    referrerPolicy="no-referrer-when-downgrade"
-                    src="https://maps.google.com/maps?q=Tarapacá+17,+Parral,+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                    className="absolute inset-0"
-                  ></iframe>
-                </div>
-                <div className="mt-6 text-center">
-                  <p className="font-bold text-[#1C4532] text-xl">Calle Tarapacá #17</p>
-                  <p className="text-gray-600">Parral, Región del Maule</p>
-                  <p className="text-sm text-green-600 font-semibold mt-2 animate-pulse">
-                    ⚠️ Importante: Agenda tu visita por WhatsApp antes de venir
-                  </p>
-                </div>
-              </div>
-
-              {/* Poster Side */}
-              <div className="w-full flex justify-center">
-                <div className="relative aspect-[3/4] w-full max-w-sm rounded-2xl overflow-hidden shadow-xl border-4 border-[#F5F1E8]">
-                  <Image
-                    src="/afiche_oficial.png"
-                    alt="Afiche DecoJade"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+            <div className="lg:col-span-2 relative rounded-card overflow-hidden ring-1 ring-forest-900/10 bg-forest-100 min-h-[22rem]">
+              <Image
+                src="/afiche_oficial.png"
+                alt="Afiche oficial de DecoJade con código QR y contacto"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover object-top"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Footer */}
-      <section className="py-24 bg-[#1C4532] text-center relative overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10">
-          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-8">¿Listo para dar vida a tu espacio?</h2>
-          <a
-            href="https://wa.me/56984668005?text=Hola! Quiero comprar un Jade"
+      {/* =========================== CTA FINAL =========================== */}
+      <section className="relative py-28 lg:py-36 bg-forest-950 text-center overflow-hidden grain">
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
+          <Image src="/jade_mediano_yeso.jpg" alt="" fill sizes="100vw" className="object-cover" />
+        </div>
+
+        <div className="container relative z-10 max-w-2xl">
+          <h2 className="t-section text-bone-100 mb-6">
+            Escríbenos y te decimos qué hay listo hoy
+          </h2>
+          <p className="text-bone-100/60 mb-10 leading-relaxed">
+            El stock cambia semana a semana. Cuéntanos qué buscas y para cuándo,
+            y te mandamos fotos de lo que tenemos disponible ahora mismo.
+          </p>
+          <Link
+            href={waLink('Hola! ¿Qué jades tienen disponibles hoy?')}
             target="_blank"
-            className="inline-flex items-center gap-3 bg-[#F5F1E8] text-[#1C4532] font-bold text-lg px-10 py-4 rounded-2xl hover:scale-105 transition-transform shadow-2xl cursor-pointer"
+            rel="noopener"
+            className="inline-flex items-center gap-3 bg-olive-400 text-forest-950 font-bold text-lg px-10 py-5 rounded-full transition-all hover:bg-bone-100 hover:gap-4"
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-            </svg>
-            Comprar por WhatsApp
-          </a>
+            <MessageCircle size={22} strokeWidth={2.2} />
+            +56 9 8466 8005
+          </Link>
+          <p className="kicker text-bone-100/30 mt-8">
+            Respondemos el mismo día
+          </p>
         </div>
       </section>
-    </main>
+    </>
   );
 }
