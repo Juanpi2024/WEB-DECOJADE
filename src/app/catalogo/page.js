@@ -5,7 +5,8 @@ import WholesaleCalculator from '@/components/WholesaleCalculator';
 import { allProducts, formatCLP, waLink } from '@/lib/products';
 
 export const metadata = {
-  title: 'Catálogo de plantas de jade | DecoJade Parral',
+  // El layout ya añade " | DecoJade" con su template de título.
+  title: 'Catálogo de plantas de jade en Parral',
   description:
     'Siete formatos de jade (Crassula ovata) cultivados en Parral: desde el pack mini de $1.000 hasta ejemplares de más de 50 cm montados como jardín bonsái. Precios de retiro en vivero.',
 };
