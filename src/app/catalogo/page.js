@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { MessageCircle, ArrowUpRight } from 'lucide-react';
 import CatalogExplorer from '@/components/CatalogExplorer';
 import WholesaleCalculator from '@/components/WholesaleCalculator';
-import { allProducts, formatCLP, waLink } from '@/lib/products';
+import { allProducts, formatCLP, waLink, YESO } from '@/lib/products';
 
 export const metadata = {
   // El layout ya añade " | DecoJade" con su template de título.
@@ -24,8 +24,9 @@ export default function CatalogoPage() {
           </span>
           <h1 className="t-hero text-bone-100 mb-6">Todo lo que hay<br />en el vivero</h1>
           <p className="text-lg text-bone-100/70 leading-relaxed">
-            Siete formatos, de $1.000 a piezas de más de 50 cm. Todos cultivados por nosotros
-            en Parral. Los precios son de retiro en el vivero, con visita agendada por WhatsApp.
+            Siete formatos, de $1.000 a piezas de más de 50 cm, todos cultivados por nosotros
+            en Parral. Cada planta va con su macetero incluido. Los precios son de retiro en el
+            vivero, con visita agendada por WhatsApp.
           </p>
         </div>
       </section>
@@ -68,7 +69,7 @@ export default function CatalogoPage() {
                       )}
                     </th>
                     <td className="px-6 py-5 text-sm text-forest-800/80">
-                      {p.tags?.includes('pieza') ? 'Bonsái decorado' : 'Macetero de yeso'}
+                      {p.tags?.includes('pieza') ? 'Bonsái decorado' : 'Macetero'}
                     </td>
                     <td className="px-6 py-5 text-right">
                       <span className="font-display text-xl text-forest-900 tnum whitespace-nowrap">
@@ -96,9 +97,9 @@ export default function CatalogoPage() {
             </table>
           </div>
 
-          <p className="text-sm text-forest-800/75 mt-5">
-            Precios de retiro en Tarapacá #17, Parral. Los formatos con rango se cotizan según
-            el ejemplar, porque no hay dos troncos iguales.
+          <p className="text-sm text-forest-800/75 mt-5 max-w-3xl leading-relaxed">
+            Precios de retiro en Tarapacá #17, Parral. {YESO.nota} Los formatos con rango se
+            cotizan según el ejemplar, porque no hay dos troncos iguales.
           </p>
         </div>
       </section>
