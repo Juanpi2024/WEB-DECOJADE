@@ -19,8 +19,8 @@ export default function Footer() {
                             <span className="font-display text-2xl">DecoJade</span>
                         </Link>
                         <p className="text-bone-100/55 leading-relaxed max-w-sm mb-7">
-                            Vivero de plantas de jade en Parral, Región del Maule. Cultivamos cada
-                            planta desde el esqueje y hacemos nuestros propios maceteros de yeso.
+                            Vivero de plantas de jade en Parral, Región del Maule. Cultivamos
+                            cada planta desde el esqueje, en nuestro propio patio.
                         </p>
                         <div className="flex gap-3">
                             <a
