@@ -15,7 +15,7 @@ export default function Home() {
       <section className="relative min-h-[92svh] flex items-end overflow-hidden grain">
         <Image
           src="/vivero_hero.jpg"
-          alt="Plantas de jade en maceteros de yeso en el vivero DecoJade de Parral"
+          alt="Plantas de jade en sus maceteros, en el vivero DecoJade de Parral"
           fill
           priority
           sizes="100vw"
@@ -42,8 +42,8 @@ export default function Home() {
 
             <p className="text-lg sm:text-xl text-bone-100/75 leading-relaxed max-w-xl mb-10">
               Siete años cultivando <em className="not-italic text-bone-100">Crassula ovata</em> desde
-              el esqueje, en maceteros de yeso que hacemos nosotros mismos. Cada planta
-              que vendemos creció acá, en Parral.
+              el esqueje. Cada planta que vendemos creció acá, en Parral, y te la
+              entregamos lista, con su macetero incluido.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-14">
@@ -110,9 +110,9 @@ export default function Home() {
               Dos formatos, siete tamaños
             </h2>
             <p className="text-forest-800/80 leading-relaxed">
-              Las plantas jóvenes y medianas van en macetero de yeso de producción propia.
-              Las piezas grandes se montan como jardín bonsái en maceta abierta, con piedras
-              y figura incluidas. Los precios son de retiro en el vivero.
+              Todas llegan con macetero incluido. Hasta los $12.000 puedes pedirlo en yeso
+              de producción propia, sin costo. Las piezas más grandes se montan como jardín
+              bonsái en maceta abierta, con piedras y figura. Los precios son de retiro en el vivero.
             </p>
           </header>
 
@@ -138,7 +138,7 @@ export default function Home() {
             <ul className="space-y-3 mb-8">
               {[
                 'Precio por unidad desde 30 plantas',
-                'Mismo macetero de yeso, sin costo extra',
+                'Macetero incluido en todos los formatos',
                 'Coordinamos la fecha de entrega con anticipación',
               ].map((t) => (
                 <li key={t} className="flex items-start gap-3 text-bone-100/80">
@@ -237,7 +237,7 @@ export default function Home() {
           </h2>
           <p className="text-lg text-forest-800/80 leading-relaxed mb-6">
             Hace más de siete años había un solo jade. Hoy hay cientos, en todas las etapas —
-            esquejes enraizando, plantas de dos años en yeso, ejemplares de tronco grueso
+            esquejes enraizando, plantas de dos años listas para regalo, ejemplares de tronco grueso
             montados como bonsái. Todos crecieron en el mismo patio de Parral.
           </p>
           <p className="text-forest-800/80 leading-relaxed">
@@ -253,7 +253,7 @@ export default function Home() {
               collage recortado a la fuerza. */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4">
             {[
-              ['/jade_chico_yeso.jpg', 'Plantas de dos años en macetero de yeso', 'aspect-3/4'],
+              ['/jade_chico_yeso.jpg', 'Plantas de dos años listas en su macetero', 'aspect-3/4'],
               ['/vivero_hero.jpg', 'Lotes de jade listos en el vivero de Parral', 'aspect-3/4 mt-6 sm:mt-10'],
               ['/jade_bonsai_decorado.jpg', 'Ejemplar de tronco grueso montado como jardín bonsái', 'aspect-3/4'],
             ].map(([src, alt, extra]) => (
@@ -263,7 +263,7 @@ export default function Home() {
             ))}
           </div>
           <p className="text-xs text-forest-800/75 mt-6">
-            Esquejes, plantas en yeso y ejemplares montados como bonsái. Todo del mismo patio.
+            Esquejes, plantas listas para llevar y ejemplares montados como bonsái. Todo del mismo patio.
           </p>
         </div>
       </section>
