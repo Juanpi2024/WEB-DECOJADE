@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata = {
-    title: 'Guía de Cuidados del Jade | DecoJade',
+    // El layout ya añade " | DecoJade" con su template de título.
+    title: 'Guía de cuidados del jade',
     description: 'Aprende a cuidar tu planta de Jade (Crassula ovata) con nuestra guía completa. Luz, riego, temperatura, sustrato, poda y más.',
 };
 
