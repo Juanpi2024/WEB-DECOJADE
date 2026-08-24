@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 import Reveal from './Reveal';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { yesoProducts, bonsaiProducts, occasions, waLink } from '@/lib/products';
+import { maceteroProducts, bonsaiProducts, occasions, waLink, YESO } from '@/lib/products';
 
 /**
  * Guía rápida del catálogo.
@@ -19,7 +19,7 @@ export default function CatalogExplorer() {
     const matches = useMemo(() => {
         if (!occasion) return null;
         return new Set(
-            [...yesoProducts, ...bonsaiProducts]
+            [...maceteroProducts, ...bonsaiProducts]
                 .filter((p) => p.tags?.includes(occasion))
                 .map((p) => p.id)
         );
@@ -69,16 +69,23 @@ export default function CatalogExplorer() {
                 </p>
             </div>
 
-            {/* Formato Yeso */}
+            {/* Plantas en macetero */}
             <div className="mb-20">
                 <FormatHeading
-                    title="Formato Yeso"
-                    note="Macetero de cemento blanco, hecho por nosotros"
+                    title="Plantas en macetero"
+                    note="Hasta $12.000"
                 />
+
+                {/* El yeso es una opción que vale la pena explicar una vez,
+                    en vez de repetirla en cada tarjeta. */}
+                <p className="flex items-start gap-3 text-sm text-forest-800/80 leading-relaxed mb-7 -mt-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500" />
+                    {YESO.nota}
+                </p>
                 {/* Grilla de 6 columnas: 5 productos entran como 3 + 2 sin
                     dejar un hueco suelto al final de la fila. */}
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
-                    {yesoProducts.map((p, i) => (
+                    {maceteroProducts.map((p, i) => (
                         <Reveal
                             key={p.id}
                             delay={(i % 3) * 90}
@@ -92,11 +99,11 @@ export default function CatalogExplorer() {
                 </div>
             </div>
 
-            {/* Formato Bonsái Decorado */}
+            {/* Jardín bonsái decorado */}
             <div>
                 <FormatHeading
-                    title="Formato Bonsái Decorado"
-                    note="Maceta abierta · piedras y figura incluidas"
+                    title="Jardín bonsái decorado"
+                    note="Maceta abierta según ejemplar · piedras y figura incluidas"
                 />
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {bonsaiProducts.map((p, i) => (
