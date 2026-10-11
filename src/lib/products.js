@@ -103,6 +103,7 @@ export const bonsaiProducts = [
     priceNote: 'según tamaño y grosor del tronco',
     variablePrice: true,
     price: 18000,
+    priceMax: 20000,
     image: '/jade_bonsai_decorado.jpg',
     badge: 'Premium decorado',
     benefits: ['Tronco grueso, forma escultural', 'Maceta abierta, según ejemplar', 'Piedras y figura incluidas'],
