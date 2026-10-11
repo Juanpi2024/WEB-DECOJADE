@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import ProductCard from './ProductCard';
 import Reveal from './Reveal';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { maceteroProducts, bonsaiProducts, occasions, waLink, YESO } from '@/lib/products';
 
 /**
@@ -29,6 +29,19 @@ export default function CatalogExplorer() {
 
     const count = matches ? matches.size : null;
 
+    // En celular los productos van en una fila deslizable. Al elegir una
+    // ocasión, cada fila se desplaza sola hasta la primera opción que calza,
+    // para que el cliente no tenga que buscarla deslizando a ciegas.
+    const rails = useRef([]);
+    useEffect(() => {
+        if (!matches) return;
+        rails.current.forEach((rail) => {
+            if (!rail || getComputedStyle(rail).display !== 'flex') return;
+            const first = [...rail.children].find((c) => matches.has(c.dataset.id));
+            if (first) rail.scrollTo({ left: first.offsetLeft - rail.offsetLeft - 24, behavior: 'smooth' });
+        });
+    }, [matches]);
+
     return (
         <div>
             {/* Chips de guía */}
@@ -42,7 +55,7 @@ export default function CatalogExplorer() {
                                 key={o.id}
                                 onClick={() => setOccasion(active ? null : o.id)}
                                 aria-pressed={active}
-                                className={`text-sm font-medium px-4 py-2 rounded-full border transition-all duration-300 ${
+                                className={`text-sm font-medium px-4 py-2.5 min-h-[44px] rounded-full border transition-all duration-300 ${
                                     active
                                         ? 'bg-forest-800 text-bone-100 border-forest-800'
                                         : 'bg-transparent text-forest-800 border-forest-900/15 hover:border-forest-600 hover:bg-forest-900/4'
@@ -55,7 +68,7 @@ export default function CatalogExplorer() {
                     {occasion && (
                         <button
                             onClick={() => setOccasion(null)}
-                            className="text-sm text-clay-600 underline underline-offset-4 hover:text-clay-600 transition-colors"
+                            className="text-sm text-clay-600 underline underline-offset-4 hover:text-clay-700 transition-colors min-h-[44px] px-1"
                         >
                             Ver todo
                         </button>
@@ -84,12 +97,14 @@ export default function CatalogExplorer() {
                 </p>
                 {/* Grilla de 6 columnas: 5 productos entran como 3 + 2 sin
                     dejar un hueco suelto al final de la fila. */}
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
+                <SwipeHint total={maceteroProducts.length} />
+                <div ref={(el) => (rails.current[0] = el)} className={RAIL + ' lg:grid-cols-6'}>
                     {maceteroProducts.map((p, i) => (
                         <Reveal
                             key={p.id}
+                            data-id={p.id}
                             delay={(i % 3) * 90}
-                            className={`h-full ${i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'}`}
+                            className={`${SLIDE} ${i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'}`}
                         >
                             <div className={`h-full transition-all duration-500 ${dim(p.id)}`}>
                                 <ProductCard product={p} priority={i < 3} />
@@ -105,9 +120,10 @@ export default function CatalogExplorer() {
                     title="Jardín bonsái decorado"
                     note="Maceta abierta según ejemplar · piedras y figura incluidas"
                 />
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <SwipeHint total={bonsaiProducts.length + 1} />
+                <div ref={(el) => (rails.current[1] = el)} className={RAIL + ' lg:grid-cols-3'}>
                     {bonsaiProducts.map((p, i) => (
-                        <Reveal key={p.id} delay={i * 90} className="h-full lg:col-span-1">
+                        <Reveal key={p.id} data-id={p.id} delay={i * 90} className={`${SLIDE} lg:col-span-1`}>
                             <div className={`h-full transition-all duration-500 ${dim(p.id)}`}>
                                 <ProductCard product={p} />
                             </div>
@@ -116,7 +132,7 @@ export default function CatalogExplorer() {
 
                     {/* Tercera celda: en vez de dejar el hueco, abrimos la
                         puerta al encargo a medida — que es donde está el margen. */}
-                    <Reveal delay={180} className="h-full sm:col-span-2 lg:col-span-1">
+                    <Reveal delay={180} className={`${SLIDE} sm:col-span-2 lg:col-span-1`}>
                         <aside className="flex h-full flex-col justify-center rounded-card border border-dashed border-forest-900/25 bg-forest-50/60 p-8 text-center">
                             <span className="kicker text-clay-600 mb-3">A pedido</span>
                             <h4 className="t-sub text-forest-900 mb-3">¿Buscas algo más grande?</h4>
@@ -138,6 +154,22 @@ export default function CatalogExplorer() {
                 </div>
             </div>
         </div>
+    );
+}
+
+// Móvil: fila deslizable con imán, la siguiente tarjeta asoma un 15%.
+// Desde 640px: la grilla de siempre.
+const RAIL =
+    'no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-6 -mx-6 px-6 pb-3 ' +
+    'sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0';
+const SLIDE = 'h-full w-[84%] shrink-0 snap-start sm:w-auto';
+
+function SwipeHint({ total }) {
+    return (
+        <p className="sm:hidden -mt-3 mb-4 flex items-center gap-1.5 text-xs font-medium text-forest-800/70">
+            Desliza para ver las {total} opciones
+            <ArrowRight size={14} strokeWidth={2.4} />
+        </p>
     );
 }
 

@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
  * Por eso el estado "oculto" lo aplica el propio componente al montarse,
  * nunca el HTML que llega del servidor.
  */
-export default function Reveal({ children, delay = 0, className = '' }) {
+export default function Reveal({ children, delay = 0, className = '', ...rest }) {
     const ref = useRef(null);
     const [armed, setArmed] = useState(false);
     const [shown, setShown] = useState(false);
@@ -44,6 +44,7 @@ export default function Reveal({ children, delay = 0, className = '' }) {
     return (
         <div
             ref={ref}
+            {...rest}
             className={`transition-[opacity,transform] duration-700 ease-out ${
                 hidden ? 'opacity-0 translate-y-6' : 'opacity-100 translate-y-0'
             } ${className}`}

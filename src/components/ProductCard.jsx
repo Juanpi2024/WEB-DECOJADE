@@ -59,11 +59,11 @@ export default function ProductCard({ product, priority = false }) {
                     </h3>
                 </div>
 
-                <p className="text-[0.94rem] leading-relaxed text-forest-800/80 mb-6">
+                <p className="text-[0.94rem] leading-relaxed text-forest-800/80 mb-5 sm:mb-6">
                     {description}
                 </p>
 
-                <ul className="space-y-2.5 mb-7">
+                <ul className="hidden sm:block space-y-2.5 mb-7">
                     {benefits?.map((benefit) => (
                         <li key={benefit} className="flex items-start gap-2.5 text-sm text-forest-800/80">
                             <Check size={15} strokeWidth={3} className="mt-1 shrink-0 text-forest-500" />

@@ -8,7 +8,7 @@ export default function Footer() {
 
     return (
         <footer className="bg-forest-950 text-bone-100 grain relative overflow-hidden">
-            <div className="container relative z-10 pt-20 pb-10">
+            <div className="container relative z-10 pt-20 pb-28 lg:pb-10">
                 <div className="grid gap-12 lg:grid-cols-12">
                     {/* Marca */}
                     <div className="lg:col-span-5">
@@ -54,11 +54,11 @@ export default function Footer() {
                     {/* Enlaces */}
                     <nav className="lg:col-span-3">
                         <h2 className="kicker text-olive-400 mb-5">Catálogo</h2>
-                        <ul className="space-y-3 text-bone-100/60">
-                            <li><Link href="/catalogo" className="hover:text-bone-100 transition-colors">Ver los 7 formatos</Link></li>
-                            <li><Link href="/catalogo#mayoreo" className="hover:text-bone-100 transition-colors">Cotizar por mayor</Link></li>
-                            <li><Link href="/cuidados" className="hover:text-bone-100 transition-colors">Guía de cuidados</Link></li>
-                            <li><Link href="/#feng-shui" className="hover:text-bone-100 transition-colors">Por qué el jade</Link></li>
+                        <ul className="space-y-1 text-bone-100/60">
+                            <li><Link href="/catalogo" className="inline-block py-2 hover:text-bone-100 transition-colors">Ver los 7 formatos</Link></li>
+                            <li><Link href="/catalogo#mayoreo" className="inline-block py-2 hover:text-bone-100 transition-colors">Cotizar por mayor</Link></li>
+                            <li><Link href="/cuidados" className="inline-block py-2 hover:text-bone-100 transition-colors">Guía de cuidados</Link></li>
+                            <li><Link href="/#feng-shui" className="inline-block py-2 hover:text-bone-100 transition-colors">Por qué el jade</Link></li>
                         </ul>
                     </nav>
 
@@ -75,14 +75,14 @@ export default function Footer() {
                             </li>
                             <li className="flex items-start gap-3">
                                 <MessageCircle size={17} className="mt-1 shrink-0 text-bone-100/55" />
-                                <a href={waLink('Hola DecoJade!')} target="_blank" rel="noopener" className="hover:text-bone-100 transition-colors tnum">
+                                <a href={waLink('Hola DecoJade!')} target="_blank" rel="noopener" className="inline-block py-2 -my-2 hover:text-bone-100 transition-colors tnum">
                                     +56 9 8466 8005
                                 </a>
                             </li>
                         </ul>
                         <p className="text-xs text-bone-100/55 mt-5 leading-relaxed">
-                            Agenda tu visita antes de venir — el vivero no tiene horario de
-                            atención fijo.
+                            Retiro con visita agendada o despacho a domicilio dentro de Parral.
+                            Pagas en efectivo o por transferencia.
                         </p>
                     </div>
                 </div>

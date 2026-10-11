@@ -6,7 +6,7 @@ import { MessageCircle, X, Send, Phone } from 'lucide-react';
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: '¡Hola! Soy el experto de DecoJade 🌿. ¿En qué te puedo ayudar hoy? (Poda, Cuidados, Ventas)' }
+        { role: 'assistant', content: '¡Hola! Soy el experto de DecoJade. Pregúntame por precios, despacho en Parral, cuidados o pedidos para eventos.' }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,14 @@ export default function Chatbot() {
     useEffect(() => {
         scrollToBottom();
     }, [messages, isOpen]);
+
+    // En celular el lanzador flotante está oculto; el chat se abre desde la
+    // barra inferior (MobileBar), que dispara este evento.
+    useEffect(() => {
+        const abrir = () => setIsOpen(true);
+        window.addEventListener('decojade:abrir-chat', abrir);
+        return () => window.removeEventListener('decojade:abrir-chat', abrir);
+    }, []);
 
     const handleSend = async () => {
         if (!input.trim()) return;
@@ -72,7 +80,7 @@ export default function Chatbot() {
                 pegada encima del sitio. Ahora usa la paleta de la marca y
                 ocupa lo que debe ocupar un botón flotante. */}
             <motion.button
-                className="fixed bottom-5 right-5 z-50 group flex items-center gap-2.5 rounded-full bg-forest-800 text-bone-100 pl-4 pr-5 py-3 shadow-[0_12px_32px_-10px_rgba(19,31,23,0.7)] ring-1 ring-bone-100/15"
+                className="hidden lg:flex fixed bottom-5 right-5 z-50 group items-center gap-2.5 rounded-full bg-forest-800 text-bone-100 pl-4 pr-5 py-3 shadow-[0_12px_32px_-10px_rgba(19,31,23,0.7)] ring-1 ring-bone-100/15"
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
@@ -98,8 +106,8 @@ export default function Chatbot() {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-20 right-5 w-[min(22rem,calc(100vw-2.5rem))] bg-bone-50 rounded-card shadow-2xl z-50 overflow-hidden flex flex-col ring-1 ring-forest-900/12"
-                        style={{ maxHeight: 'calc(100vh - 120px)' }}
+                        className="fixed inset-x-3 bottom-24 lg:inset-x-auto lg:bottom-20 lg:right-5 lg:w-[22rem] bg-bone-50 rounded-card shadow-2xl z-50 overflow-hidden flex flex-col ring-1 ring-forest-900/12"
+                        style={{ maxHeight: 'calc(100dvh - 120px)' }}
                     >
                         {/* Header */}
                         <div className="bg-forest-800 p-4 text-bone-100 flex justify-between items-center">
@@ -107,9 +115,14 @@ export default function Chatbot() {
                                 <h3 className="font-display text-xl">Experto DecoJade</h3>
                                 <p className="text-xs text-bone-100/60">Asesoría y precios al día</p>
                             </div>
-                            <button onClick={openWhatsApp} className="bg-olive-400 hover:bg-bone-100 p-2 rounded-full transition text-forest-950" title="Ir a WhatsApp">
-                                <Phone size={18} />
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <button onClick={openWhatsApp} data-wa="chatbot" aria-label="Seguir por WhatsApp" className="grid h-10 w-10 place-items-center bg-olive-400 hover:bg-bone-100 rounded-full transition text-forest-950" title="Ir a WhatsApp">
+                                    <Phone size={18} />
+                                </button>
+                                <button onClick={() => setIsOpen(false)} aria-label="Cerrar el chat" className="grid h-10 w-10 place-items-center rounded-full text-bone-100/80 hover:bg-bone-100/10 transition">
+                                    <X size={20} />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Messages */}
