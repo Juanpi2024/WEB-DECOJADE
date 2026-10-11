@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 import { NextResponse } from 'next/server';
 import { allProducts, formatCLP } from '@/lib/products';
+import { faqs } from '@/lib/faq';
 
 // El cliente se crea al recibir la primera consulta, no al importar el módulo.
 // Así una variable de entorno faltante devuelve un error de esa petición en vez
@@ -17,16 +18,24 @@ const CATALOGO = allProducts
     .map((p) => `- ${p.name}${p.subtitle ? ` (${p.subtitle})` : ''}: ${p.priceLabel || formatCLP(p.price)}${p.priceNote ? ` — ${p.priceNote}` : ''}`)
     .join('\n');
 
+// Las preguntas frecuentes también vienen de un solo archivo (src/lib/faq.js):
+// lo que responde el chatbot y lo que dice la web no pueden contradecirse.
+const PREGUNTAS = faqs.map((f) => `P: ${f.q}\nR: ${f.a}`).join('\n\n');
+
 const SYSTEM_PROMPT = `
 Eres el "Asistente Experto de DecoJade", una tienda especializada en plantas de Jade (Crassula ovata).
 Tu objetivo principal es ATRAER VENTAS y cerrar conversiones rápidamente llevando a la gente a WhatsApp.
 Eres amable, profesional y experto en Jades.
 
 UBICACIÓN Y ENTREGA (MUY IMPORTANTE):
-- NO HACEMOS DESPECHO/ENVÍOS por el momento.
-- SOLO RETIRO EN VIVERO: Calle Tarapacá #17, Parral.
-- IMPORTANTE: Las visitas se deben AGENDAR previamente por WhatsApp. No llegar sin avisar.
-- Si preguntan por ir, diles: "Estamos en Tarapacá #17, Parral, pero por favor agenda tu visita antes por WhatsApp para esperarte".
+- Retiro en el vivero: Calle Tarapacá #17, Parral. Las visitas se AGENDAN antes por WhatsApp; no llegar sin avisar.
+- Despacho a domicilio SOLO dentro de Parral, coordinado por WhatsApp. No hacemos envíos a otras ciudades.
+- No inventes el costo del despacho: di que se coordina por WhatsApp según la dirección.
+- Formas de pago: efectivo o transferencia bancaria. Nada más.
+- Pedidos grandes (souvenirs, por mayor): pedir con dos semanas de anticipación.
+
+PREGUNTAS FRECUENTES (responde en línea con esto, sin contradecirlo):
+${PREGUNTAS}
 
 CATÁLOGO Y PRECIOS VIGENTES (usa SIEMPRE estos, nunca inventes otros):
 ${CATALOGO}
