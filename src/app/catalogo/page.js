@@ -2,9 +2,12 @@ import Link from 'next/link';
 import { MessageCircle, ArrowUpRight } from 'lucide-react';
 import CatalogExplorer from '@/components/CatalogExplorer';
 import WholesaleCalculator from '@/components/WholesaleCalculator';
+import Faq from '@/components/Faq';
+import { JsonLd, catalogoSchema, faqSchema } from '@/lib/schema';
 import { allProducts, formatCLP, waLink, YESO } from '@/lib/products';
 
 export const metadata = {
+  alternates: { canonical: '/catalogo' },
   // El layout ya añade " | DecoJade" con su template de título.
   title: 'Catálogo de plantas de jade en Parral',
   description:
@@ -14,6 +17,8 @@ export const metadata = {
 export default function CatalogoPage() {
   return (
     <>
+      <JsonLd data={catalogoSchema()} />
+      <JsonLd data={faqSchema()} />
       {/* ============================ CABECERA ============================ */}
       <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 bg-forest-900 grain overflow-hidden">
         <div className="absolute -left-40 -bottom-40 w-[34rem] h-[34rem] rounded-full bg-forest-800/60 blur-3xl pointer-events-none" />
@@ -25,8 +30,8 @@ export default function CatalogoPage() {
           <h1 className="t-hero text-bone-100 mb-6">Todo lo que hay<br />en el vivero</h1>
           <p className="text-lg text-bone-100/70 leading-relaxed">
             Siete formatos, de $1.000 a piezas de más de 50 cm, todos cultivados por nosotros
-            en Parral. Cada planta va con su macetero incluido. Los precios son de retiro en el
-            vivero, con visita agendada por WhatsApp.
+            en Parral. Cada planta va con su macetero incluido. Retiras en el vivero con visita
+            agendada, o te la llevamos a domicilio dentro de Parral.
           </p>
         </div>
       </section>
@@ -85,7 +90,7 @@ export default function CatalogoPage() {
                         target="_blank"
                         rel="noopener"
                         aria-label={`Consultar por ${p.name}`}
-                        className="inline-flex items-center gap-1 text-sm font-semibold text-forest-700 hover:text-clay-600 transition-colors whitespace-nowrap"
+                        className="inline-flex items-center gap-1 min-h-[44px] px-2 -mx-2 text-sm font-semibold text-forest-700 hover:text-clay-600 transition-colors whitespace-nowrap"
                       >
                         Consultar
                         <ArrowUpRight size={15} strokeWidth={2.5} />
@@ -98,14 +103,14 @@ export default function CatalogoPage() {
           </div>
 
           <p className="text-sm text-forest-800/75 mt-5 max-w-3xl leading-relaxed">
-            Precios de retiro en Tarapacá #17, Parral. {YESO.nota} Los formatos con rango se
+            Precios de retiro en Tarapacá #17, Parral; el despacho dentro de Parral se coordina por WhatsApp. {YESO.nota} Los formatos con rango se
             cotizan según el ejemplar, porque no hay dos troncos iguales.
           </p>
         </div>
       </section>
 
       {/* ============================ MAYOREO ============================ */}
-      <section id="mayoreo" className="relative py-24 lg:py-32 bg-forest-900 overflow-hidden grain">
+      <section id="mayoreo" className="relative py-16 sm:py-24 lg:py-32 bg-forest-900 overflow-hidden grain">
         <div className="absolute -right-32 -top-24 w-[34rem] h-[34rem] rounded-full bg-forest-800/50 blur-3xl pointer-events-none" />
         <div className="container relative z-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div>
@@ -123,6 +128,13 @@ export default function CatalogoPage() {
             </p>
           </div>
           <WholesaleCalculator />
+        </div>
+      </section>
+
+      {/* ===================== PREGUNTAS FRECUENTES ===================== */}
+      <section id="preguntas" className="py-16 sm:py-24 lg:py-28">
+        <div className="container">
+          <Faq />
         </div>
       </section>
 
