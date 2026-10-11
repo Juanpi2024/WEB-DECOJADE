@@ -160,6 +160,10 @@
     opacity: 0.55;
   }
 
+  /* Carrusel móvil: se desliza con el dedo pero sin barra de scroll visible */
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
   /* Deriva lentísima del fondo del hero — da vida sin distraer */
   .drift { animation: drift 20s ease-in-out infinite; }
 

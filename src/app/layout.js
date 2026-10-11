@@ -2,9 +2,12 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
+import MobileBar from "@/components/MobileBar";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   metadataBase: new URL("https://web-decojade.vercel.app"),
+  alternates: { canonical: "/" },
   title: {
     default: "DecoJade | Vivero de plantas de jade en Parral",
     template: "%s | DecoJade",
@@ -55,6 +58,17 @@ const jsonLd = {
     addressCountry: "CL",
   },
   sameAs: ["https://instagram.com/decojade"],
+  image: "https://web-decojade.vercel.app/vivero_hero.jpg",
+  logo: "https://web-decojade.vercel.app/logo_decojade.jpg",
+  priceRange: "$1.000 – $25.000+",
+  currenciesAccepted: "CLP",
+  paymentAccepted: "Efectivo, transferencia bancaria",
+  areaServed: { "@type": "City", name: "Parral" },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Plantas de jade",
+    url: "https://web-decojade.vercel.app/catalogo",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -78,6 +92,10 @@ export default function RootLayout({ children }) {
         <main id="contenido" className="flex-1">{children}</main>
         <Footer />
         <Chatbot />
+        <MobileBar />
+        {/* Visitas, páginas, de dónde llegan y desde qué dispositivo.
+            Plan gratuito de Vercel: 50.000 eventos al mes. */}
+        <Analytics />
       </body>
     </html>
   );

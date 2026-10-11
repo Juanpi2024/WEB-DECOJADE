@@ -6,11 +6,15 @@ import {
 } from 'lucide-react';
 import CatalogExplorer from '@/components/CatalogExplorer';
 import WholesaleCalculator from '@/components/WholesaleCalculator';
+import Faq from '@/components/Faq';
+import { JsonLd, catalogoSchema, faqSchema } from '@/lib/schema';
 import { waLink } from '@/lib/products';
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={catalogoSchema()} />
+      <JsonLd data={faqSchema()} />
       {/* ============================ HERO ============================ */}
       <section className="relative min-h-[92svh] flex items-end overflow-hidden grain">
         <Image
@@ -86,7 +90,7 @@ export default function Home() {
         <div className="container grid grid-cols-2 lg:grid-cols-4 divide-x divide-forest-900/8">
           {[
             { Icon: Sprout, title: 'Del esqueje al árbol', desc: 'No revendemos. Producimos.' },
-            { Icon: MapPin, title: 'Tarapacá #17, Parral', desc: 'Retiro con visita agendada' },
+            { Icon: MapPin, title: 'Retiro o despacho', desc: 'Dentro de Parral' },
             { Icon: MessageCircle, title: 'Asesoría de por vida', desc: 'Te enseñamos a cuidarla' },
             { Icon: Boxes, title: 'Venta por mayor', desc: 'Desde 30 unidades' },
           ].map(({ Icon, title, desc }, i) => (
@@ -102,7 +106,7 @@ export default function Home() {
       </section>
 
       {/* ============================ CATÁLOGO ============================ */}
-      <section id="catalogo" className="py-24 lg:py-32">
+      <section id="catalogo" className="py-16 sm:py-24 lg:py-32">
         <div className="container">
           <header className="max-w-2xl mb-14">
             <span className="kicker text-clay-600">El catálogo</span>
@@ -112,7 +116,7 @@ export default function Home() {
             <p className="text-forest-800/80 leading-relaxed">
               Todas llegan con macetero incluido. Hasta los $12.000 puedes pedirlo en yeso
               de producción propia, sin costo. Las piezas más grandes se montan como jardín
-              bonsái en maceta abierta, con piedras y figura. Los precios son de retiro en el vivero.
+              bonsái en maceta abierta, con piedras y figura. Retiras en el vivero o te la llevamos dentro de Parral.
             </p>
           </header>
 
@@ -121,7 +125,7 @@ export default function Home() {
       </section>
 
       {/* ============================ MAYOREO ============================ */}
-      <section id="mayoreo" className="relative py-24 lg:py-32 bg-forest-900 overflow-hidden grain">
+      <section id="mayoreo" className="relative py-16 sm:py-24 lg:py-32 bg-forest-900 overflow-hidden grain">
         <div className="absolute -right-32 -top-32 w-[38rem] h-[38rem] rounded-full bg-forest-800/50 blur-3xl pointer-events-none" />
 
         <div className="container relative z-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
@@ -148,7 +152,7 @@ export default function Home() {
               ))}
             </ul>
 
-            <div className="flex flex-wrap gap-x-10 gap-y-5 border-t border-bone-100/15 pt-7">
+            <div className="hidden sm:flex flex-wrap gap-x-10 gap-y-5 border-t border-bone-100/15 pt-7">
               <div>
                 <span className="font-display text-3xl text-olive-400 tnum leading-none">30</span>
                 <span className="block text-xs text-bone-100/60 mt-1.5">unidades mínimo</span>
@@ -169,10 +173,10 @@ export default function Home() {
       </section>
 
       {/* =========================== FENG SHUI =========================== */}
-      <section id="feng-shui" className="py-24 lg:py-32 bg-bone-100">
+      <section id="feng-shui" className="py-16 sm:py-24 lg:py-32 bg-bone-100">
         <div className="container grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div className="order-2 lg:order-1 relative">
-            <div className="relative aspect-4/5 rounded-card overflow-hidden ring-1 ring-forest-900/10">
+            <div className="relative aspect-video sm:aspect-4/5 rounded-card overflow-hidden ring-1 ring-forest-900/10">
               <Image
                 src="/jade_bonsai_decorado.jpg"
                 alt="Jade montado como jardín bonsái con piedras y figura de buda"
@@ -182,7 +186,7 @@ export default function Home() {
               />
             </div>
             {/* Nota flotante: aterriza el simbolismo en algo concreto */}
-            <div className="absolute -bottom-6 -right-3 sm:-right-6 max-w-[15rem] bg-clay-500 text-bone-50 rounded-2xl p-5 shadow-xl">
+            <div className="hidden sm:block absolute -bottom-6 -right-6 max-w-[15rem] bg-clay-500 text-bone-50 rounded-2xl p-5 shadow-xl">
               <p className="font-display text-lg leading-snug">
                 «El que regala un jade está deseando prosperidad, no despachando un trámite.»
               </p>
@@ -219,7 +223,7 @@ export default function Home() {
 
             <Link
               href="/cuidados"
-              className="inline-flex items-center gap-2 font-semibold text-forest-800 border-b-2 border-clay-500 pb-1 transition-colors hover:text-clay-600"
+              className="inline-flex items-center gap-2 min-h-[44px] font-semibold text-forest-800 border-b-2 border-clay-500 transition-colors hover:text-clay-600"
             >
               Guía completa de cuidados
               <ArrowUpRight size={18} strokeWidth={2.4} />
@@ -229,7 +233,7 @@ export default function Home() {
       </section>
 
       {/* =========================== HISTORIA =========================== */}
-      <section className="py-24 lg:py-32">
+      <section className="py-16 sm:py-24 lg:py-32">
         <div className="container max-w-3xl text-center">
           <span className="kicker text-clay-600">Quiénes somos</span>
           <h2 className="t-section text-forest-900 mt-3 mb-7">
@@ -269,7 +273,7 @@ export default function Home() {
       </section>
 
       {/* ============================ VIVERO ============================ */}
-      <section className="py-24 lg:py-32 bg-bone-100">
+      <section className="py-16 sm:py-24 lg:py-32 bg-bone-100">
         <div className="container">
           <header className="max-w-2xl mb-12">
             <span className="kicker text-clay-600">Visítanos</span>
@@ -315,7 +319,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-2 relative rounded-card overflow-hidden ring-1 ring-forest-900/10 bg-forest-100 min-h-[22rem]">
+            <div className="hidden lg:block lg:col-span-2 relative rounded-card overflow-hidden ring-1 ring-forest-900/10 bg-forest-100 min-h-[22rem]">
               <Image
                 src="/afiche_oficial.png"
                 alt="Afiche oficial de DecoJade con código QR y contacto"
@@ -325,6 +329,13 @@ export default function Home() {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ===================== PREGUNTAS FRECUENTES ===================== */}
+      <section id="preguntas" className="py-16 sm:py-24 lg:py-32">
+        <div className="container">
+          <Faq />
         </div>
       </section>
 
