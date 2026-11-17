@@ -9,6 +9,18 @@ import WholesaleCalculator from '@/components/WholesaleCalculator';
 import Faq from '@/components/Faq';
 import { JsonLd, catalogoSchema, faqSchema } from '@/lib/schema';
 import { waLink } from '@/lib/products';
+import GrowthScrub, { Viewfinder } from '@/components/cine/GrowthScrub';
+import CountUp from '@/components/cine/CountUp';
+import ScrollFade from '@/components/cine/ScrollFade';
+
+/* Divide un texto en palabras que suben una a una (animación solo CSS). */
+function Rise({ text, start = 0 }) {
+  return text.split(' ').map((w, i) => (
+    <span key={i} className="rw">
+      <span className="rw-i" style={{ '--i': start + i }}>{w}</span>{' '}
+    </span>
+  ));
+}
 
 export default function Home() {
   return (
@@ -16,7 +28,8 @@ export default function Home() {
       <JsonLd data={catalogoSchema()} />
       <JsonLd data={faqSchema()} />
       {/* ============================ HERO ============================ */}
-      <section className="relative min-h-[92svh] flex items-end overflow-hidden grain">
+      <section data-shot="hero" className="relative min-h-[92svh] flex items-end overflow-hidden grain">
+        <div className="absolute inset-0 hero-in">
         <Image
           src="/vivero_hero.jpg"
           alt="Plantas de jade en sus maceteros, en el vivero DecoJade de Parral"
@@ -25,13 +38,16 @@ export default function Home() {
           sizes="100vw"
           className="object-cover object-center drift"
         />
+        </div>
         {/* Doble velo: uno vertical para el texto, uno cálido para unificar el color */}
         <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/72 to-forest-950/40" />
         <div className="absolute inset-0 bg-forest-900/25 mix-blend-multiply" />
         {/* Velo superior: sostiene la legibilidad del header sobre cualquier foto */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-forest-950/70 to-transparent" />
 
-        <div className="container relative z-10 pb-16 pt-40 sm:pb-20">
+        <Viewfinder />
+
+        <ScrollFade className="container relative z-10 pb-24 pt-40 sm:pb-28">
           <div className="max-w-3xl">
             <span className="kicker text-olive-400 flex items-center gap-2.5 mb-6">
               <span className="w-8 h-px bg-olive-400/60" />
@@ -39,9 +55,9 @@ export default function Home() {
             </span>
 
             <h1 className="t-hero text-bone-100 mb-7">
-              Regala un árbol de jade
+              <Rise text="Regala un árbol de jade" />
               <br />
-              <span className="text-olive-400 italic">que se hereda.</span>
+              <span className="text-olive-400 italic"><Rise text="que se hereda." start={5} /></span>
             </h1>
 
             <p className="text-lg sm:text-xl text-bone-100/75 leading-relaxed max-w-xl mb-10">
@@ -76,12 +92,18 @@ export default function Home() {
                 ['+1.000', 'plantas por temporada'],
               ].map(([n, label]) => (
                 <div key={label}>
-                  <dt className="font-display text-2xl sm:text-4xl text-bone-100 tnum leading-none">{n}</dt>
+                  <dt className="font-display text-2xl sm:text-4xl text-bone-100 tnum leading-none"><CountUp value={n} /></dt>
                   <dd className="text-[0.68rem] sm:text-xs text-bone-100/60 mt-2 leading-snug">{label}</dd>
                 </div>
               ))}
             </dl>
           </div>
+        </ScrollFade>
+
+        <div className="hud absolute z-10 bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-8 sm:bottom-24 whitespace-nowrap" aria-hidden="true">
+          <span className="rec"><i />En vivero</span>
+          <span className="hidden sm:inline">Parral <b>36°08′S</b> <b>71°50′W</b></span>
+          <span>Crassula ovata</span>
         </div>
       </section>
 
@@ -106,7 +128,7 @@ export default function Home() {
       </section>
 
       {/* ============================ CATÁLOGO ============================ */}
-      <section id="catalogo" className="py-16 sm:py-24 lg:py-32">
+      <section id="catalogo" data-shot="catalogo" className="py-16 sm:py-24 lg:py-32">
         <div className="container">
           <header className="max-w-2xl mb-14">
             <span className="kicker text-clay-600">El catálogo</span>
@@ -124,8 +146,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===================== DEL ESQUEJE AL ÁRBOL (scroll) ===================== */}
+      <GrowthScrub />
+
       {/* ============================ MAYOREO ============================ */}
-      <section id="mayoreo" className="relative py-16 sm:py-24 lg:py-32 bg-forest-900 overflow-hidden grain">
+      <section id="mayoreo" data-shot="mayoreo" className="relative py-16 sm:py-24 lg:py-32 bg-forest-900 overflow-hidden grain">
         <div className="absolute -right-32 -top-32 w-[38rem] h-[38rem] rounded-full bg-forest-800/50 blur-3xl pointer-events-none" />
 
         <div className="container relative z-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
